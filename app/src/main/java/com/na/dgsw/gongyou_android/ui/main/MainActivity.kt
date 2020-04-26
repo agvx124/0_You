@@ -1,10 +1,11 @@
 package com.na.dgsw.gongyou_android.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.databinding.ActivityMainBinding
 import com.na.dgsw.gongyou_android.ui.base.BaseActivity
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * Created by NA on 2020-04-16
@@ -13,21 +14,23 @@ import com.na.dgsw.gongyou_android.ui.base.BaseActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
+    private val MainViewModel : MainViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
 
     override fun getLayoutId(): Int {
-        TODO("Not yet implemented")
+        return R.layout.activity_main
     }
 
     override fun getViewModel(): MainViewModel {
-        TODO("Not yet implemented")
+        return MainViewModel
     }
 
     override fun getBindingVariable(): Int {
-        TODO("Not yet implemented")
+        return BR.viewModel
     }
 
     override fun setUp() {
