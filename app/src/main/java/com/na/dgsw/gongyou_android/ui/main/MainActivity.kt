@@ -14,23 +14,19 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
-    private val MainViewModel : MainViewModel by viewModel()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+    private val mMainViewModel : MainViewModel by viewModel()
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
     }
 
-    override fun getViewModel(): MainViewModel {
-        return MainViewModel
-    }
-
     override fun getBindingVariable(): Int {
         return BR.viewModel
+    }
+
+    override fun getViewModel(): MainViewModel {
+//        mMainViewModel.setNavigator(this)
+        return mMainViewModel
     }
 
     override fun setUp() {

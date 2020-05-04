@@ -16,4 +16,10 @@ val appModule = module {
     }
 }
 
+val apiModule = module {
+    single {
+
+    }
+}
+
 val appModules = listOf(appModule);
