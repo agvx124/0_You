@@ -1,6 +1,7 @@
 package com.na.dgsw.gongyou_android.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.databinding.ActivityMainBinding
@@ -30,6 +31,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun setUp() {
-        TODO("Not yet implemented")
+        Log.d("TEST", "TEST")
     }
 }
