@@ -6,8 +6,6 @@ package com.na.dgsw.gongyou_android.data
  * skehdgur8591@naver.com
  */
 
-class GenericResponse<T> {
-
-    private lateinit var status: Int
+data class GenericResponse<T>(var status: Int = 404, var meesage: String = "Not Found", var data: T? = null) {
 
 }
