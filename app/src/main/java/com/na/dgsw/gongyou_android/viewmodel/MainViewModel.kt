@@ -1,7 +1,7 @@
-package com.na.dgsw.gongyou_android.ui.main
+package com.na.dgsw.gongyou_android.viewmodel
 
 import android.app.Application
-import com.na.dgsw.gongyou_android.ui.base.BaseViewModel
+import com.na.dgsw.gongyou_android.base.BaseViewModel
 
 
 /**

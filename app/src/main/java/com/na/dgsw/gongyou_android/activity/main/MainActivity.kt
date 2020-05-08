@@ -1,11 +1,11 @@
-package com.na.dgsw.gongyou_android.ui.main
+package com.na.dgsw.gongyou_android.activity.main
 
-import android.os.Bundle
 import android.util.Log
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.databinding.ActivityMainBinding
-import com.na.dgsw.gongyou_android.ui.base.BaseActivity
+import com.na.dgsw.gongyou_android.base.BaseActivity
+import com.na.dgsw.gongyou_android.viewmodel.MainViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
@@ -26,7 +26,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun getViewModel(): MainViewModel {
-//        mMainViewModel.setNavigator(this)
         return mMainViewModel
     }
 

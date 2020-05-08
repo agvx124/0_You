@@ -1,4 +1,4 @@
-package com.na.dgsw.gongyou_android.ui.base
+package com.na.dgsw.gongyou_android.base
 
 
 /**

@@ -9,7 +9,7 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.na.dgsw.gongyou_android.viewmodel.MainViewModel" />
+            type="com.na.dgsw.gongyou_android.viewmodel.LoginViewModel" />
     </data>
 
 
