@@ -15,7 +15,8 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
-    private val mMainViewModel : MainViewModel by viewModel()
+    override val viewModelClass: Class<MainViewModel>
+        get() = MainViewModel::class.java
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -25,11 +26,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         return BR.viewModel
     }
 
-    override fun getViewModel(): MainViewModel {
-        return mMainViewModel
-    }
-
     override fun setUp() {
         Log.d("TEST", "TEST")
     }
+
+    override fun observerViewModel() {
+
+    }
+
 }
