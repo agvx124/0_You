@@ -12,6 +12,8 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import java.io.File
 import java.lang.StringBuilder
 import java.text.DecimalFormat
+import kotlin.math.log10
+import kotlin.math.pow
 
 /**
  * Created by NA on 2020-04-16
@@ -32,7 +34,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun setUp() {
-        getViewDataBinding().totalStorageTextView.setText(getTotalInternalMemorySize())
+        getViewDataBinding().remainStorageTextView.text = checkExternalAvailableMemory(true)
+        getViewDataBinding().totalStorageTextView.text = checkExternalStorageAllMemory(true)
+
+        val value: Int = (checkExternalAvailableMemory(false).toDouble() / checkExternalStorageAllMemory(false).toDouble() * 100.0).toInt()
+        getViewDataBinding().remainStorageProgressBar.progress = value
     }
 
     override fun observerViewModel() {
@@ -42,62 +48,61 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private fun isExternalMemoryAvailable(): Boolean {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)
     }
+    
+    private fun checkExternalStorageAllMemory(checkVal: Boolean): String {
 
-    private fun getTotalInternalMemorySize(): String {
+        return if (isExternalMemoryAvailable()) {
+            val statFs = StatFs(Environment.getExternalStorageDirectory().path)
+            val blockSize: Long = statFs.blockSizeLong
+            val totalBlock: Long = statFs.blockCountLong
 
-        if (isExternalMemoryAvailable()) {
-            var statFs: StatFs = StatFs(Environment.getExternalStorageDirectory().path)
-            var blockSize: Long = statFs.blockSizeLong
-            var totalBlock: Long = statFs.blockCountLong
+            if (checkVal) {
+                getFileSizeVal(blockSize * totalBlock)
+            }
+            else {
+                getFileSize(blockSize * totalBlock)
+            }
 
-            return getFileSize(blockSize * totalBlock)
         }
         else {
-            return getFileSize(0)
+            getFileSizeVal(0)
         }
+    }
 
+    private fun checkExternalAvailableMemory(checkVal: Boolean): String {
+        return if (isExternalMemoryAvailable()) {
+            val file: File = Environment.getExternalStorageDirectory()
+            val statFs = StatFs(file.path)
+            val blockSize: Long = statFs.blockSizeLong
+            val availableBlocks: Long = statFs.availableBlocksLong
 
-//        var path: File = Environment.getDataDirectory();
-//        var stat: StatFs = StatFs(path.path)
-//        var blockSize: Long = stat.blockSizeLong
-//        var totalBlocks: Long = stat.blockCountLong
+            if (checkVal) {
+                getFileSizeVal(blockSize * availableBlocks)
+            }
+            else {
+                getFileSize(blockSize * availableBlocks)
+            }
+        }
+        else {
+            getFileSizeVal(0)
+        }
+    }
 
-//        return getFileSize(totalBlocks * blockSize);
+    private fun getFileSizeVal(size: Long): String {
+        if (size <= 0) return "0"
+
+        val units: Array<String> = arrayOf("B", "KB", "MB", "GB", "TB");
+        val digitGroups: Int = (log10(size.toDouble()) / log10(1024.0)).toInt()
+        return DecimalFormat("#,##0.#").format(size / 1024.0.pow(digitGroups.toDouble())) + " " + units[digitGroups]
     }
 
     private fun getFileSize(size: Long): String {
         if (size <= 0) return "0"
 
-        val units: Array<String> = arrayOf("B", "KB", "MB", "GB", "TB");
-        var digitGroups: Int = (Math.log10(size.toDouble()) / Math.log10(1024.0)).toInt()
-        return DecimalFormat("#,##0.#").format(size / Math.pow(1024.0, digitGroups.toDouble())) + " " + units[digitGroups]
+        val digitGroups: Int = (log10(size.toDouble()) / log10(1024.0)).toInt()
+        return DecimalFormat("#,##0.#").format(size / 1024.0.pow(digitGroups.toDouble()))
     }
 
-//    fun formatSize(size: Long): String {
-//        var suffix: String? = null
-//        var sizeIndex: Long = size;
-//
-//        if (sizeIndex >= 1024) {
-//            suffix = " KB"
-//            sizeIndex /= 1024
-//            if (sizeIndex >= 1024) {
-//                suffix = " MB"
-//                sizeIndex /= 1024
-//            }
-//        }
-//
-//        var resultBuffer: StringBuilder = StringBuilder(sizeIndex.toString())
-//
-//        var commaOffset: Int = resultBuffer.length - 3
-//        while (commaOffset > 0) {
-//            resultBuffer.insert(commaOffset, ',')
-//            commaOffset -= 3
-//        }
-//
-//        if (suffix != null) resultBuffer.append(suffix)
-//
-//        return resultBuffer.toString()
-//    }
 
 }
 
