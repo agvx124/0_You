@@ -1,7 +1,5 @@
-package com.na.dgsw.gongyou_android.activity.splash
+package com.na.dgsw.gongyou_android.view.splash
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.base.BaseActivity

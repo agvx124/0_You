@@ -1,7 +1,5 @@
-package com.na.dgsw.gongyou_android.activity.login
+package com.na.dgsw.gongyou_android.view.login
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.base.BaseActivity

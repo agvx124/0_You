@@ -1,16 +1,14 @@
-package com.na.dgsw.gongyou_android.activity.main
+package com.na.dgsw.gongyou_android.view.main
 
 import android.os.Environment
 import android.os.StatFs
-import android.util.Log
+import android.view.Menu
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.databinding.ActivityMainBinding
 import com.na.dgsw.gongyou_android.base.BaseActivity
 import com.na.dgsw.gongyou_android.viewmodel.MainViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
 import java.io.File
-import java.lang.StringBuilder
 import java.text.DecimalFormat
 import kotlin.math.log10
 import kotlin.math.pow
@@ -40,6 +38,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         val value: Int = (checkExternalAvailableMemory(false).toDouble() / checkExternalStorageAllMemory(false).toDouble() * 100.0).toInt()
         getViewDataBinding().remainStorageProgressBar.progress = value
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_titlebar, menu)
+        return true
     }
 
     override fun observerViewModel() {

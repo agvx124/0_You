@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/main_background"
-        tools:context=".activity.main.MainActivity">
+        tools:context=".view.main.MainActivity">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -102,28 +102,31 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="8dp"
             app:cardCornerRadius="8dp"
+            app:layout_constraintHeight_default="wrap"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="14dp"
                     android:text="파일 공유"
+                    android:fontFamily="@font/nanumbarungothic"
                     android:textColor="#000000"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -131,11 +134,12 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="12dp"
+                    android:layout_below="@+id/textView"
+                    android:fontFamily="@font/nanumbarungothic"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="8dp"
                     android:text="지금 가지고 있는 파일을 공유해보세요!"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -143,8 +147,9 @@
                 <View
                     android:id="@+id/view"
                     android:layout_width="match_parent"
+                    android:layout_marginTop="8dp"
                     android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/textView2"
                     android:background="#F3F3F3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -153,11 +158,21 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/view"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/nanumbarungothic"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_alignParentRight="true"
                     android:text="자세히 보기"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="parent" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </RelativeLayout>
 
 
         </androidx.cardview.widget.CardView>
