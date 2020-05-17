@@ -39,6 +39,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         val value: Int = (checkExternalAvailableMemory(false).toDouble() / checkExternalStorageAllMemory(false).toDouble() * 100.0).toInt()
         getViewDataBinding().remainStorageProgressBar.progress = value
+
     }
 
     override fun observerViewModel() {
@@ -48,7 +49,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private fun isExternalMemoryAvailable(): Boolean {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)
     }
-    
+
     private fun checkExternalStorageAllMemory(checkVal: Boolean): String {
 
         return if (isExternalMemoryAvailable()) {
