@@ -9,6 +9,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 
 /**
  * Created by NA on 2020-04-16
@@ -18,7 +19,8 @@ import androidx.fragment.app.Fragment
 
 abstract class BaseFragment<T: ViewDataBinding, V: BaseViewModel<*>> : Fragment() {
 
-    private lateinit var mViewDataBinding: T
+    protected lateinit var mViewDataBinding: T
+    protected lateinit var viewModel : V
     private var mActivity: BaseActivity<*, *>? = null
 
     @LayoutRes
@@ -26,9 +28,11 @@ abstract class BaseFragment<T: ViewDataBinding, V: BaseViewModel<*>> : Fragment(
 
     abstract fun getBindingVariable(): Int
 
-    abstract fun getViewModel(): V
-
     abstract fun setUp()
+
+    abstract fun observerViewModel()
+
+    abstract val viewModelClass: Class<V>
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -50,7 +54,8 @@ abstract class BaseFragment<T: ViewDataBinding, V: BaseViewModel<*>> : Fragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mViewDataBinding.setVariable(getBindingVariable(), getViewModel())
+        this.viewModel = if (::viewModel.isInitialized) viewModel else ViewModelProvider(this).get(viewModelClass)
+        mViewDataBinding.setVariable(getBindingVariable(), viewModel)
         mViewDataBinding.lifecycleOwner = this
         mViewDataBinding.executePendingBindings()
 
@@ -59,6 +64,10 @@ abstract class BaseFragment<T: ViewDataBinding, V: BaseViewModel<*>> : Fragment(
 
     fun getBaseActivity() : BaseActivity<*, *>? {
         return mActivity
+    }
+
+    fun getViewDataBinding() : T {
+        return mViewDataBinding
     }
 
     override fun onDetach() {

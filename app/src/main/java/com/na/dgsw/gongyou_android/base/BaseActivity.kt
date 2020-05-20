@@ -14,8 +14,8 @@ import androidx.lifecycle.ViewModelProvider
 
 abstract class BaseActivity<T: ViewDataBinding, V: BaseViewModel<*>> : AppCompatActivity(), BaseFragment.CallBack {
 
-    private lateinit var mViewDataBinding: T
-    private lateinit var viewModel : V
+    protected lateinit var mViewDataBinding: T
+    protected lateinit var viewModel : V
 
     @LayoutRes
     abstract fun getLayoutId(): Int
