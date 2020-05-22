@@ -28,7 +28,7 @@ class StorageMainFragment : BaseFragment<FragmentStorageBinding, MainViewModel>(
     }
 
     override fun observerViewModel() {
-        TODO("Not yet implemented")
+
     }
 
     override fun setUp() {

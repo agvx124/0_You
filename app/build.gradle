@@ -37,9 +37,9 @@ android {
 }
 
 dependencies {
+
     // DataBinding
 //    kapt 'androidx.databinding:databinding-compiler:3.6.3'
-
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -83,4 +83,7 @@ dependencies {
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // FilePicker
+    implementation 'com.vincent.filepicker:MultiTypeFilePicker:1.0.8'
 }
