@@ -1,2 +1,6 @@
-# GongYou_Android
-2020학년도 프로젝트 실무
+# '0 You?' 프로젝트
+
+FE - Android Kotlin MVVM / WEB
+BE - Node.js
+
+기한 - 2020/04/03 ~ 2020/07/13 (예정)
