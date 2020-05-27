@@ -3,6 +3,7 @@
     package="com.na.dgsw.gongyou_android">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,8 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
+        <activity android:name=".view.send.SendActivity"></activity>
         <activity android:name=".view.splash.SplashActivity" />
         <activity android:name=".view.login.LoginActivity" />
         <activity android:name=".view.main.MainActivity">

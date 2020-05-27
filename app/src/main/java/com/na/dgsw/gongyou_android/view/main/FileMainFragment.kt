@@ -77,7 +77,7 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, MainViewModel>() {
                 }
                 "문서" -> {
                     var intent = Intent(activity!!.application, NormalFilePickActivity::class.java)
-                    intent.putExtra(NormalFilePickActivity.SUFFIX, arrayOf<String>("xlsx", "xls", "doc", "docx", "ppt", "pptx", "pdf"))
+                    intent.putExtra(NormalFilePickActivity.SUFFIX, arrayOf("xlsx", "xls", "doc", "docx", "ppt", "pptx", "pdf"))
                     intent.putExtra(Constant.MAX_NUMBER, 9)
                     startActivityForResult(intent, Constant.REQUEST_CODE_PICK_FILE)
                 }
@@ -95,13 +95,11 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, MainViewModel>() {
                         val path = file.path
                         builder.append(path + "\n")
                     }
-                    print(builder.toString())
 
-//                    print(data.getP)
                 }
             }
             Constant.REQUEST_CODE_PICK_VIDEO -> {
-                if (resultCode == ImagePickActivity.RESULT_OK) {
+                if (resultCode == VideoPickActivity.RESULT_OK) {
                     var list = (data!!.getParcelableArrayListExtra<VideoFile>(Constant.RESULT_PICK_IMAGE))
                     var builder = StringBuilder()
                     for (file in list) {
@@ -112,7 +110,7 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, MainViewModel>() {
                 }
             }
             Constant.REQUEST_CODE_PICK_AUDIO -> {
-                if (resultCode == ImagePickActivity.RESULT_OK) {
+                if (resultCode == AudioPickActivity.RESULT_OK) {
                     var list = (data!!.getParcelableArrayListExtra<AudioFile>(Constant.RESULT_PICK_IMAGE))
                     var builder = StringBuilder()
                     for (file in list) {
@@ -123,7 +121,7 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, MainViewModel>() {
                 }
             }
             Constant.REQUEST_CODE_PICK_FILE -> {
-                if (resultCode == ImagePickActivity.RESULT_OK) {
+                if (resultCode == NormalFilePickActivity.RESULT_OK) {
                     var list = (data!!.getParcelableArrayListExtra<NormalFile>(Constant.RESULT_PICK_IMAGE))
                     var builder = StringBuilder()
                     for (file in list) {
