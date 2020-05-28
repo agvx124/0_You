@@ -40,7 +40,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         print("PASS STORAGE")
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragmentStorage).commit()
 
-        mViewDataBinding.navigationView.setOnNavigationItemSelectedListener {
+        binding.navigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.storage_item -> {
                     val fragmentStorage = StorageMainFragment()

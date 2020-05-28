@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "248417060039",
+    "firebase_url": "https://gongyou-c6aa9.firebaseio.com",
+    "project_id": "gongyou-c6aa9",
+    "storage_bucket": "gongyou-c6aa9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248417060039:android:5df9c17193c3812d282ae2",
+        "android_client_info": {
+          "package_name": "com.na.dgsw.gongyou_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248417060039-ps3gp3u1bb59k3o4fj98809v2uoa3kb4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.na.dgsw.gongyou_android",
+            "certificate_hash": "294f58ff2dfb41b513d05f14c24a23f03f5c8c7d"
+          }
+        },
+        {
+          "client_id": "248417060039-hrg14s7rl9c5jpns7hsh5bnrkgcrson6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS4UCw4FYspBpdz77S9n-f82DDJU7XetI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248417060039-hrg14s7rl9c5jpns7hsh5bnrkgcrson6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -19,7 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 
 abstract class BaseFragment<T: ViewDataBinding, V: BaseViewModel<*>> : Fragment() {
 
-    protected lateinit var mViewDataBinding: T
+    protected lateinit var binding: T
     protected lateinit var viewModel : V
     private var mActivity: BaseActivity<*, *>? = null
 
@@ -48,16 +48,16 @@ abstract class BaseFragment<T: ViewDataBinding, V: BaseViewModel<*>> : Fragment(
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mViewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-        return mViewDataBinding.root
+        binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this.viewModel = if (::viewModel.isInitialized) viewModel else ViewModelProvider(this).get(viewModelClass)
-        mViewDataBinding.setVariable(getBindingVariable(), viewModel)
-        mViewDataBinding.lifecycleOwner = this
-        mViewDataBinding.executePendingBindings()
+        binding.setVariable(getBindingVariable(), viewModel)
+        binding.lifecycleOwner = this
+        binding.executePendingBindings()
 
         setUp()
     }
@@ -67,7 +67,7 @@ abstract class BaseFragment<T: ViewDataBinding, V: BaseViewModel<*>> : Fragment(
     }
 
     fun getViewDataBinding() : T {
-        return mViewDataBinding
+        return binding
     }
 
     override fun onDetach() {

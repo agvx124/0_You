@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 
 abstract class BaseActivity<T: ViewDataBinding, V: BaseViewModel<*>> : AppCompatActivity(), BaseFragment.CallBack {
 
-    protected lateinit var mViewDataBinding: T
+    protected lateinit var binding: T
     protected lateinit var viewModel : V
 
     @LayoutRes
@@ -39,15 +39,15 @@ abstract class BaseActivity<T: ViewDataBinding, V: BaseViewModel<*>> : AppCompat
     }
 
     private fun performDataBinding() {
-        mViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
+        binding = DataBindingUtil.setContentView(this, getLayoutId())
         this.viewModel = if (::viewModel.isInitialized) viewModel else ViewModelProvider(this).get(viewModelClass)
-        mViewDataBinding.lifecycleOwner = this
-        mViewDataBinding.setVariable(getBindingVariable(), viewModel)
-        mViewDataBinding.executePendingBindings()
+        binding.lifecycleOwner = this
+        binding.setVariable(getBindingVariable(), viewModel)
+        binding.executePendingBindings()
     }
 
     fun getViewDataBinding() : T {
-        return mViewDataBinding
+        return binding
     }
 
     override fun onFragmentAttached() {
