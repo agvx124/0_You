@@ -1,5 +1,8 @@
 package com.na.dgsw.gongyou_android.view.main
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Environment
 import android.os.StatFs
 import android.view.Menu
@@ -24,6 +27,8 @@ import kotlin.math.pow
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
+    val permissionList = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
     override val viewModelClass: Class<MainViewModel>
         get() = MainViewModel::class.java
 
@@ -36,8 +41,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun setUp() {
+        checkPermission()
         val fragmentStorage = StorageMainFragment()
-        print("PASS STORAGE")
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragmentStorage).commit()
 
         binding.navigationView.setOnNavigationItemSelectedListener {
@@ -70,6 +75,19 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun observerViewModel() {
 
+    }
+
+    private fun checkPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+            return;
+
+        for (permission in permissionList) {
+            var check = checkCallingOrSelfPermission(permission)
+
+            // 권한 허용 여부 판단
+            if (check == PackageManager.PERMISSION_DENIED)
+                requestPermissions(permissionList, 0)
+        }
     }
 
 

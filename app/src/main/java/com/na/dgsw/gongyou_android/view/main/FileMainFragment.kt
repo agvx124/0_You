@@ -32,6 +32,7 @@ import java.lang.StringBuilder
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class FileMainFragment : BaseFragment<FragmentFileBinding, MainViewModel>() {
 
+    // ListView SET
     private var fileKindList = arrayListOf(
         FileKind("ic_image", "이미지"),
         FileKind("ic_video", "비디오"),
@@ -99,6 +100,7 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, MainViewModel>() {
 
                     val intent = Intent(activity!!.application, SendActivity::class.java)
                     intent.putExtra("dataUrl", builder.toString())
+                    intent.putExtra("extension", list)
                     startActivity(intent)
                 }
             }
