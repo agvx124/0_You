@@ -24,6 +24,8 @@ class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
     // 해당 파일 확장자 명
 //    private var EXTENSION = ""
 
+    private val fileNameList = ArrayList<String>()
+
     override val viewModelClass: Class<SendViewModel>
         get() = SendViewModel::class.java
 
@@ -78,20 +80,22 @@ class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
 
     private fun uploadFile(list: ArrayList<Uri>) {
         for (filePath in list) {
-            var index = 1
             val progressDialog: ProgressDialog = ProgressDialog(this)
             progressDialog.setTitle("업로드 중 ...")
             progressDialog.show()
 
             val storage: FirebaseStorage = FirebaseStorage.getInstance()
 
-            val randomNum = (0 .. 999999).random()
+            val randomNum = (0 .. 9999999).random()
 
             // 파일 확장자 구하기
             val pos = filePath.path!!.lastIndexOf(".")
             val ext = filePath.path!!.substring(pos + 1)
+
             // 랜덤 숫자로 파일이름 부여
             val fileName = randomNum.toString() + "." + ext
+            // 파일 이름 리스트 저장
+            fileNameList.add(fileName)
 
             val storageReference: StorageReference = storage.getReferenceFromUrl("gs://gongyou-c6aa9.appspot.com").child(ext + "/" + fileName)
 
@@ -99,10 +103,11 @@ class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
                 .addOnSuccessListener {
                     progressDialog.dismiss()
                     Toast.makeText(this, "업로드 완료", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, MainActivity::class.java))
                 }
                 .addOnFailureListener {
                     progressDialog.dismiss()
-                    Toast.makeText(this, "업로드 실패", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "업로드 실패, 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
                 }
                 .addOnProgressListener { taskSnapshot: UploadTask.TaskSnapshot ->
                     @SuppressWarnings("VisibleForTests")
