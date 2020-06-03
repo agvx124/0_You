@@ -7,5 +7,5 @@ package com.na.dgsw.gongyou_android
  */
 
 class Constants {
-    public val DEFAULT_HOST = "http://10.72.160.18:3000/"
+    public val DEFAULT_HOST = "http://10.72.160.18:3000/v1"
 }

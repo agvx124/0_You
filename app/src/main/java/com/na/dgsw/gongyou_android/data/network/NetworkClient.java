@@ -1,4 +1,4 @@
-package com.na.dgsw.gongyou_android.data.Network;
+package com.na.dgsw.gongyou_android.data.network;
 
 import android.util.Log;
 

@@ -15,24 +15,31 @@ import java.util.concurrent.Executors
  */
 
 class Utils {
-    val RETROFIT: Retrofit =
-        Retrofit.Builder()
-            .client(getClient())
-            .baseUrl(Constants::DEFAULT_HOST.toString())
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .callbackExecutor(Executors.newSingleThreadExecutor())
-            .build()
 
-    private fun getClient(): OkHttpClient {
-        val builder: OkHttpClient.Builder = OkHttpClient.Builder()
+    companion object {
+        val RETROFIT: Retrofit =
+            Retrofit.Builder()
+                .client(getClient())
+                .baseUrl(Constants::DEFAULT_HOST.toString())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .callbackExecutor(Executors.newSingleThreadExecutor())
+                .build()
 
-        if (BuildConfig.DEBUG) {
-            val interceptor = HttpLoggingInterceptor()
-            interceptor.level = HttpLoggingInterceptor.Level.BODY
-            builder.addInterceptor(interceptor)
+        private fun getClient(): OkHttpClient {
+            val builder: OkHttpClient.Builder = OkHttpClient.Builder()
+
+            if (BuildConfig.DEBUG) {
+                val interceptor = HttpLoggingInterceptor()
+                interceptor.level = HttpLoggingInterceptor.Level.BODY
+                builder.addInterceptor(interceptor)
+            }
+
+            return builder.build()
         }
-
-        return builder.build()
     }
+
+
+
+
 }
