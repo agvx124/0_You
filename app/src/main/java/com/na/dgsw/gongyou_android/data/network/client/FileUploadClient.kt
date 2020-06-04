@@ -1,6 +1,7 @@
-package com.na.dgsw.gongyou_android.data.network
+package com.na.dgsw.gongyou_android.data.network.client
 
 import com.na.dgsw.gongyou_android.Utils
+import com.na.dgsw.gongyou_android.base.BaseClient
 import com.na.dgsw.gongyou_android.data.network.request.FileRequest
 import com.na.dgsw.gongyou_android.data.network.response.FileResponse
 import com.na.dgsw.gongyou_android.data.network.service.FileService
@@ -12,14 +13,14 @@ import io.reactivex.Single
  * skehdgur8591@naver.com
  */
 
-abstract class FileUploadClient: NetworkClient() {
-    abstract var fileService: FileService
+class FileUploadClient: BaseClient<FileService>() {
 
-    init {
-        fileService = Utils.RETROFIT.create(fileService::class.java)
+    override fun getService(): Class<FileService> {
+        return FileService::class.java
     }
 
     fun postUrlUpload(fileRequest: FileRequest): Single<FileResponse> {
-        return fileService.postUrlUpload(fileRequest).map(getResponseObjectsFunction())
+        return service.postUrlUpload(fileRequest).map(getResponseObjectsFunction())
     }
+
 }

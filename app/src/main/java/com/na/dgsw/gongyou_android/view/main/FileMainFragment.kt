@@ -1,12 +1,10 @@
 package com.na.dgsw.gongyou_android.view.main
 
 import android.content.Intent
-import android.widget.AdapterView
-import android.widget.Toast
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.base.BaseFragment
-import com.na.dgsw.gongyou_android.data.FileKind
+import com.na.dgsw.gongyou_android.data.dto.FileKind
 import com.na.dgsw.gongyou_android.databinding.FragmentFileBinding
 import com.na.dgsw.gongyou_android.view.send.SendActivity
 import com.na.dgsw.gongyou_android.viewmodel.MainViewModel

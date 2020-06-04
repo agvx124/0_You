@@ -2,6 +2,8 @@ package com.na.dgsw.gongyou_android.viewmodel
 
 import android.app.Application
 import com.na.dgsw.gongyou_android.base.BaseViewModel
+import com.na.dgsw.gongyou_android.data.network.client.FileUploadClient
+import com.na.dgsw.gongyou_android.data.network.response.FileResponse
 
 
 /**
@@ -9,6 +11,9 @@ import com.na.dgsw.gongyou_android.base.BaseViewModel
  * skehdgur8591@naver.com
  */
 
-class SendViewModel(application: Application): BaseViewModel<Any>(application) {
+class SendViewModel(application: Application): BaseViewModel<FileResponse>(application) {
+    private val fileUploadClient: FileUploadClient = FileUploadClient()
+
+
 
 }

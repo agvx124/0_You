@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.na.dgsw.gongyou_android.R
-import com.na.dgsw.gongyou_android.data.FileKind
+import com.na.dgsw.gongyou_android.data.dto.FileKind
 
 
 /**

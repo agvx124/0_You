@@ -1,10 +1,9 @@
 package com.na.dgsw.gongyou_android.data.network.service
 
-import com.na.dgsw.gongyou_android.data.GenericResponse
 import com.na.dgsw.gongyou_android.data.network.request.FileRequest
 import com.na.dgsw.gongyou_android.data.network.response.FileResponse
 import io.reactivex.Single
-import retrofit2.Response
+import com.na.dgsw.gongyou_android.data.network.response.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -19,6 +18,6 @@ interface FileService {
     @POST("/upload/urlUpload")
     fun postUrlUpload(
         @Body fileRequest: FileRequest
-    ): Single<Response<GenericResponse<FileResponse>>>
+    ): Single<retrofit2.Response<Response<FileResponse>>>
 
 }

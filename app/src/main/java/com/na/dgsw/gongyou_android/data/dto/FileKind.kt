@@ -1,4 +1,4 @@
-package com.na.dgsw.gongyou_android.data
+package com.na.dgsw.gongyou_android.data.dto
 
 
 /**
