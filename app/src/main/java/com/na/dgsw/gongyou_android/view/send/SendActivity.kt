@@ -9,12 +9,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.Observer
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.base.BaseActivity
+import com.na.dgsw.gongyou_android.data.network.request.FileRequest
 import com.na.dgsw.gongyou_android.databinding.ActivitySendBinding
 import com.na.dgsw.gongyou_android.view.main.MainActivity
 import com.na.dgsw.gongyou_android.viewmodel.SendViewModel
@@ -75,7 +77,17 @@ class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
     }
 
     override fun observerViewModel() {
+        with(viewModel) {
 
+            onSuccessEvent.observe(this@SendActivity, Observer {
+                Toast.makeText(this@SendActivity, it, Toast.LENGTH_SHORT).show()
+            })
+
+            onErrorEvent.observe(this@SendActivity, Observer {
+                Toast.makeText(this@SendActivity, it.message, Toast.LENGTH_SHORT).show()
+            })
+
+        }
     }
 
     private fun uploadFile(list: ArrayList<Uri>) {
@@ -101,6 +113,7 @@ class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
 
             storageReference.putFile(Uri.parse("file://" + filePath.path))
                 .addOnSuccessListener {
+                    viewModel.postUrlUpload(FileRequest("agvx124", fileName, 0, ext))
                     progressDialog.dismiss()
                     Toast.makeText(this, "업로드 완료", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, MainActivity::class.java))

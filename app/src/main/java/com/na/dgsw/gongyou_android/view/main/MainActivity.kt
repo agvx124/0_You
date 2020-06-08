@@ -9,6 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
@@ -27,7 +28,7 @@ import kotlin.math.pow
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
-    val permissionList = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    private val permissionList = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
     override val viewModelClass: Class<MainViewModel>
         get() = MainViewModel::class.java
@@ -45,27 +46,24 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         val fragmentStorage = StorageMainFragment()
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragmentStorage).commit()
 
-        binding.navigationView.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.storage_item -> {
-                    val fragmentStorage = StorageMainFragment()
-                    print("PASS STORAGE")
-                    supportActionBar?.title = "저장공간"
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragmentStorage).commit()
-                    return@setOnNavigationItemSelectedListener true
-                }
-                R.id.file_item -> {
-                    val fileMainFragment = FileMainFragment()
-                    print("PASS FILE")
-                    supportActionBar?.title = "파일탐색"
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fileMainFragment).commit()
-                    return@setOnNavigationItemSelectedListener true
-                }
-            }
-            false
-        }
+//        binding.navigationView.setOnNavigationItemSelectedListener {
+//            when (it.itemId) {
+//                R.id.storage_item -> {
+//                    val fragmentStorage = StorageMainFragment()
+//                    supportActionBar?.title = "저장공간"
+//                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragmentStorage).commit()
+//                    return@setOnNavigationItemSelectedListener true
+//                }
+//                R.id.file_item -> {
+//                    val fileMainFragment = FileMainFragment()
+//                    supportActionBar?.title = "파일탐색"
+//                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fileMainFragment).commit()
+//                    return@setOnNavigationItemSelectedListener true
+//                }
+//            }
+//            false
+//        }
     }
-
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -74,15 +72,24 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun observerViewModel() {
+        with(viewModel) {
+            storageItemEvent.observe(this@MainActivity, Observer {
+                val fragmentStorage = StorageMainFragment()
+                supportActionBar?.title = "저장공간"
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragmentStorage).commit()
+            })
 
+            fileItemEvent.observe(this@MainActivity, Observer {
+                val fileMainFragment = FileMainFragment()
+                supportActionBar?.title = "파일탐색"
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fileMainFragment).commit()
+            })
+        }
     }
 
     private fun checkPermission() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
-            return;
-
         for (permission in permissionList) {
-            var check = checkCallingOrSelfPermission(permission)
+            val check = checkCallingOrSelfPermission(permission)
 
             // 권한 허용 여부 판단
             if (check == PackageManager.PERMISSION_DENIED)

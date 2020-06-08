@@ -20,7 +20,7 @@ class Utils {
         val RETROFIT: Retrofit =
             Retrofit.Builder()
                 .client(getClient())
-                .baseUrl(Constants::DEFAULT_HOST.toString())
+                .baseUrl(Constants.DEFAULT_HOST)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .callbackExecutor(Executors.newSingleThreadExecutor())

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import com.na.dgsw.gongyou_android.utils.SingleLiveEvent
 
 /**
  * Created by NA on 2020-04-16
@@ -21,6 +22,8 @@ abstract class BaseActivity<T: ViewDataBinding, V: BaseViewModel<*>> : AppCompat
     abstract fun getLayoutId(): Int
 
     abstract val viewModelClass: Class<V>
+
+    val onErrorEvent = SingleLiveEvent<Throwable>()
 
     /**
      * Binding 을 위한 함수

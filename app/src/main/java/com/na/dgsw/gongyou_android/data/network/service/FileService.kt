@@ -15,7 +15,7 @@ import retrofit2.http.POST
 
 interface FileService {
 
-    @POST("/upload/urlUpload")
+    @POST("v1/upload/urlUpload")
     fun postUrlUpload(
         @Body fileRequest: FileRequest
     ): Single<retrofit2.Response<Response<FileResponse>>>
