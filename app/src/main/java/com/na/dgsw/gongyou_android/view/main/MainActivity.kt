@@ -43,26 +43,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun setUp() {
         checkPermission()
-        val fragmentStorage = StorageMainFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragmentStorage).commit()
-
-//        binding.navigationView.setOnNavigationItemSelectedListener {
-//            when (it.itemId) {
-//                R.id.storage_item -> {
-//                    val fragmentStorage = StorageMainFragment()
-//                    supportActionBar?.title = "저장공간"
-//                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragmentStorage).commit()
-//                    return@setOnNavigationItemSelectedListener true
-//                }
-//                R.id.file_item -> {
-//                    val fileMainFragment = FileMainFragment()
-//                    supportActionBar?.title = "파일탐색"
-//                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fileMainFragment).commit()
-//                    return@setOnNavigationItemSelectedListener true
-//                }
-//            }
-//            false
-//        }
+        replaceStorageFragment()
     }
 
 
@@ -74,15 +55,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun observerViewModel() {
         with(viewModel) {
             storageItemEvent.observe(this@MainActivity, Observer {
-                val fragmentStorage = StorageMainFragment()
-                supportActionBar?.title = "저장공간"
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragmentStorage).commit()
+                replaceStorageFragment()
             })
 
             fileItemEvent.observe(this@MainActivity, Observer {
-                val fileMainFragment = FileMainFragment()
-                supportActionBar?.title = "파일탐색"
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fileMainFragment).commit()
+                replaceFileFragment()
             })
         }
     }
@@ -97,6 +74,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
     }
 
+    private fun replaceStorageFragment() {
+        val fragmentStorage = StorageMainFragment()
+        supportActionBar?.title = "저장공간"
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragmentStorage).commit()
+    }
+
+    private fun replaceFileFragment() {
+        val fileMainFragment = FileMainFragment()
+        supportActionBar?.title = "파일탐색"
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fileMainFragment).commit()
+    }
 
 }
 

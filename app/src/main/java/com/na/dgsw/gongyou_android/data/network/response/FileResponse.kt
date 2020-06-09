@@ -6,6 +6,4 @@ package com.na.dgsw.gongyou_android.data.network.response
  * skehdgur8591@naver.com
  */
 
-data class FileResponse(var idx: Int, var sendId: String, var filesUrl: String, var fileNumbered: String) {
-
-}
+data class FileResponse(var idx: Int, var fileEigenValue: Int, var sendId: String, var filesUrl: String, var fileNumbered: String)

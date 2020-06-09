@@ -6,4 +6,4 @@ package com.na.dgsw.gongyou_android.data.network.request
  * skehdgur8591@naver.com
  */
 
-data class FileRequest(var id: String, var filesUrl: String, var fileNum: Int, var fileExt: String)
+data class FileRequest(var id: String, var fileEigenValue: Int, var filesUrl: String, var fileNum: Int, var fileExt: String)

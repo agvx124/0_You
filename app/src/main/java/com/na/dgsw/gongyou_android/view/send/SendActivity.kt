@@ -23,10 +23,7 @@ import com.na.dgsw.gongyou_android.viewmodel.SendViewModel
 
 class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
 
-    // 해당 파일 확장자 명
-//    private var EXTENSION = ""
-
-    private val fileNameList = ArrayList<String>()
+    private val userSaveNum = (0 .. 9999999).random()
 
     override val viewModelClass: Class<SendViewModel>
         get() = SendViewModel::class.java
@@ -42,7 +39,6 @@ class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
     override fun setUp() {
         val intent = intent
         val dataUrls = intent.getStringExtra("dataUrl")
-//        EXTENSION = intent.getStringExtra("extension")
 
         val arrayUriIndex: ArrayList<String> = dataUrls.split("\n") as ArrayList<String>
         // "" null Check
@@ -78,9 +74,8 @@ class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
 
     override fun observerViewModel() {
         with(viewModel) {
-
             onSuccessEvent.observe(this@SendActivity, Observer {
-                Toast.makeText(this@SendActivity, it, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@SendActivity, "파일 업로드에 성공하셨습니다.", Toast.LENGTH_SHORT).show()
             })
 
             onErrorEvent.observe(this@SendActivity, Observer {
@@ -92,35 +87,33 @@ class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
 
     private fun uploadFile(list: ArrayList<Uri>) {
         for (filePath in list) {
-            val progressDialog: ProgressDialog = ProgressDialog(this)
+            val progressDialog = ProgressDialog(this)
             progressDialog.setTitle("업로드 중 ...")
             progressDialog.show()
 
             val storage: FirebaseStorage = FirebaseStorage.getInstance()
 
-            val randomNum = (0 .. 9999999).random()
-
             // 파일 확장자 구하기
             val pos = filePath.path!!.lastIndexOf(".")
             val ext = filePath.path!!.substring(pos + 1)
 
-            // 랜덤 숫자로 파일이름 부여
-            val fileName = randomNum.toString() + "." + ext
-            // 파일 이름 리스트 저장
-            fileNameList.add(fileName)
+            val randomNum = (0 .. 9999999).random()
+            val fileName = "$randomNum.$ext"
 
-            val storageReference: StorageReference = storage.getReferenceFromUrl("gs://gongyou-c6aa9.appspot.com").child(ext + "/" + fileName)
+            val storageReference: StorageReference = storage.getReferenceFromUrl("gs://gongyou-c6aa9.appspot.com").child(
+                "$ext/$fileName"
+            )
 
             storageReference.putFile(Uri.parse("file://" + filePath.path))
                 .addOnSuccessListener {
-                    viewModel.postUrlUpload(FileRequest("agvx124", fileName, 0, ext))
+                    viewModel.postUrlUpload(FileRequest("agvx124", userSaveNum, fileName, list.size, ext))
                     progressDialog.dismiss()
-                    Toast.makeText(this, "업로드 완료", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this, "업로드 완료", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, MainActivity::class.java))
                 }
                 .addOnFailureListener {
                     progressDialog.dismiss()
-                    Toast.makeText(this, "업로드 실패, 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Firebase Upload Fail, Restart", Toast.LENGTH_SHORT).show()
                 }
                 .addOnProgressListener { taskSnapshot: UploadTask.TaskSnapshot ->
                     @SuppressWarnings("VisibleForTests")

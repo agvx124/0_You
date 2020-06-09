@@ -3,7 +3,7 @@ package com.na.dgsw.gongyou_android.data.network.service
 import com.na.dgsw.gongyou_android.data.network.request.FileRequest
 import com.na.dgsw.gongyou_android.data.network.response.FileResponse
 import io.reactivex.Single
-import com.na.dgsw.gongyou_android.data.network.response.Response
+import com.na.dgsw.gongyou_android.data.network.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 

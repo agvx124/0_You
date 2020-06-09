@@ -15,21 +15,23 @@ import com.na.dgsw.gongyou_android.view.main.StorageMainFragment
  * skehdgur8591@naver.com
  */
 
-class MainViewModel(application: Application): BaseViewModel<Any>(application) {
+class MainViewModel(application: Application): BaseViewModel<Any>(application), BottomNavigationView.OnNavigationItemSelectedListener {
 
     val storageItemEvent = SingleLiveEvent<Unit>()
     val fileItemEvent = SingleLiveEvent<Unit>()
 
-    fun onNavigationClick(item:MenuItem) {
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.storage_item -> {
                 storageItemEvent.call()
+                return true
             }
             R.id.file_item -> {
                 fileItemEvent.call()
+                return true
             }
         }
-
+        return false
     }
 
 }

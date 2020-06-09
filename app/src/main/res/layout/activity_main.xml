@@ -35,7 +35,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:onNavigationItemSelected="@{viewModel::onNavigationClick}"
+            app:onNavigationItemSelected="@{viewModel::onNavigationItemSelected}"
             app:menu="@menu/main_bottomnavigationview" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,8 +24,6 @@ import java.lang.ref.WeakReference
 
 abstract class BaseViewModel<N>(application: Application) : AndroidViewModel(application) {
 
-    private var navigator : WeakReference<N>? = null
-
     private val disposable: CompositeDisposable = CompositeDisposable()
 
     val onErrorEvent = SingleLiveEvent<Throwable>()
@@ -67,7 +65,8 @@ abstract class BaseViewModel<N>(application: Application) : AndroidViewModel(app
             }
         }
 
-    protected open fun onRetrieveDataSuccess(data: N) { }
+    protected open fun onRetrieveDataSuccess(data: N) {
+    }
 
     protected open fun onRetrieveBaseSuccess(message: String) { }
 
