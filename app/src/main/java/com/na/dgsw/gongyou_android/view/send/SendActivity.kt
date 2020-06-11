@@ -24,6 +24,7 @@ import com.na.dgsw.gongyou_android.viewmodel.SendViewModel
 class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
 
     private val userSaveNum = (0 .. 9999999).random()
+    private val arrayUri: ArrayList<Uri> = ArrayList()
 
     override val viewModelClass: Class<SendViewModel>
         get() = SendViewModel::class.java
@@ -46,29 +47,11 @@ class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
             if (fileUrl == "") arrayUriIndex.remove("")
         }
 
-        val arrayUri: ArrayList<Uri> = ArrayList()
-
         for (fileUri in arrayUriIndex) {
             arrayUri.add(Uri.parse(fileUri))
         }
 
         binding.fileSizeTextView.text = "선택한 파일 " + arrayUriIndex.size + "개를 보내겠습니까?"
-
-        binding.sendBtn.setOnClickListener {
-            uploadFile(arrayUri)
-        }
-
-        binding.cancelBtn.setOnClickListener {
-            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-            builder.setTitle("보내기 취소")
-            builder.setMessage("파일 보내기를 취소하시겠습니까?")
-            builder.setPositiveButton("아니오") { dialog, which ->
-
-            }
-            builder.setNegativeButton("예") { dialog, which ->
-                startActivity(Intent(this, MainActivity::class.java))
-            }.show()
-        }
 
     }
 
@@ -80,6 +63,22 @@ class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
 
             onErrorEvent.observe(this@SendActivity, Observer {
                 Toast.makeText(this@SendActivity, it.message, Toast.LENGTH_SHORT).show()
+            })
+
+            sendBtnClickEvent.observe(this@SendActivity, Observer {
+                uploadFile(arrayUri)
+            })
+
+            cancelBtnClickEvent.observe(this@SendActivity, Observer {
+                val builder: AlertDialog.Builder = AlertDialog.Builder(application)
+                builder.setTitle("보내기 취소")
+                builder.setMessage("파일 보내기를 취소하시겠습니까?")
+                builder.setPositiveButton("아니오") { _, _ ->
+
+                }
+                builder.setNegativeButton("예") { _, _ ->
+                    startActivity(Intent(application, MainActivity::class.java))
+                }.show()
             })
 
         }
@@ -108,12 +107,11 @@ class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
                 .addOnSuccessListener {
                     viewModel.postUrlUpload(FileRequest("agvx124", userSaveNum, fileName, list.size, ext))
                     progressDialog.dismiss()
-//                    Toast.makeText(this, "업로드 완료", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, MainActivity::class.java))
+
                 }
                 .addOnFailureListener {
                     progressDialog.dismiss()
-                    Toast.makeText(this, "Firebase Upload Fail, Restart", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Firebase Upload Fail", Toast.LENGTH_SHORT).show()
                 }
                 .addOnProgressListener { taskSnapshot: UploadTask.TaskSnapshot ->
                     @SuppressWarnings("VisibleForTests")

@@ -13,3 +13,4 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 fun setOnNavigationItemSelected(view: BottomNavigationView, listener: BottomNavigationView.OnNavigationItemSelectedListener) {
     view.setOnNavigationItemSelectedListener(listener)
 }
+

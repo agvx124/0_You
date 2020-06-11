@@ -17,12 +17,22 @@ import com.na.dgsw.gongyou_android.utils.SingleLiveEvent
 class SendViewModel(application: Application): BaseViewModel<FileResponse>(application) {
     private val fileUploadClient: FileUploadClient = FileUploadClient()
 
+    private var uriNumbered: Int = 0
+
     val onSuccessEvent = SingleLiveEvent<FileResponse>()
+    val cancelBtnClickEvent = SingleLiveEvent<Unit>()
+    val sendBtnClickEvent = SingleLiveEvent<Unit>()
 
     fun postUrlUpload(request: FileRequest) {
-        isLoading.value = true
-
         addDisposable(fileUploadClient.postUrlUpload(request), dataObserver)
+    }
+
+    fun onCancelBtnClick() {
+        cancelBtnClickEvent.call()
+    }
+
+    fun onSendBtnClick() {
+        sendBtnClickEvent.call()
     }
 
     override fun onRetrieveDataSuccess(data: FileResponse) {

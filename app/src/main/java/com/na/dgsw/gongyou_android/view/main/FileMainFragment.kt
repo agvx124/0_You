@@ -28,7 +28,8 @@ import java.lang.StringBuilder
  */
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class FileMainFragment : BaseFragment<FragmentFileBinding, MainViewModel>() {
+class
+FileMainFragment : BaseFragment<FragmentFileBinding, MainViewModel>() {
 
     // ListView SET
     private var fileKindList = arrayListOf(
