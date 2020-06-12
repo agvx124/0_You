@@ -1,6 +1,7 @@
 package com.na.dgsw.gongyou_android.view.main
 
 import android.content.Intent
+import androidx.lifecycle.Observer
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.base.BaseFragment
@@ -28,8 +29,7 @@ import java.lang.StringBuilder
  */
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class
-FileMainFragment : BaseFragment<FragmentFileBinding, MainViewModel>() {
+class FileMainFragment : BaseFragment<FragmentFileBinding, MainViewModel>() {
 
     // ListView SET
     private var fileKindList = arrayListOf(
@@ -53,37 +53,6 @@ FileMainFragment : BaseFragment<FragmentFileBinding, MainViewModel>() {
     override fun setUp() {
         val fileKindListAdapter = FileKindListAdapter(activity!!.applicationContext, fileKindList)
         binding.listView.adapter = fileKindListAdapter
-
-        binding.listView.setOnItemClickListener { parent, view, position, id ->
-            val selectedItem = listView.getItemAtPosition(position) as FileKind
-
-            when (selectedItem.name) {
-                "이미지" -> {
-                    val intent = Intent(activity!!.application, ImagePickActivity::class.java)
-                    intent.putExtra(ImagePickActivity.IS_NEED_CAMERA, true)
-                    intent.putExtra(Constant.MAX_NUMBER, 9)
-                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_IMAGE)
-                }
-                "비디오" -> {
-                    val intent = Intent(activity!!.application, VideoPickActivity::class.java)
-                    intent.putExtra(VideoPickActivity.IS_NEED_CAMERA, true)
-                    intent.putExtra(Constant.MAX_NUMBER, 9)
-                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_VIDEO)
-                }
-                "오디오" -> {
-                    val intent = Intent(activity!!.application, AudioPickActivity::class.java)
-                    intent.putExtra(AudioPickActivity.IS_NEED_RECORDER, true)
-                    intent.putExtra(Constant.MAX_NUMBER, 9)
-                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_AUDIO)
-                }
-                "문서" -> {
-                    val intent = Intent(activity!!.application, NormalFilePickActivity::class.java)
-                    intent.putExtra(NormalFilePickActivity.SUFFIX, arrayOf("xlsx", "xls", "doc", "docx", "ppt", "pptx", "pdf"))
-                    intent.putExtra(Constant.MAX_NUMBER, 9)
-                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_FILE)
-                }
-            }
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -149,6 +118,31 @@ FileMainFragment : BaseFragment<FragmentFileBinding, MainViewModel>() {
     }
 
     override fun observerViewModel() {
-
+        with(viewModel) {
+            imgItemEvent.observe(this@FileMainFragment, Observer {
+                val intent = Intent(activity!!.application, ImagePickActivity::class.java)
+                intent.putExtra(ImagePickActivity.IS_NEED_CAMERA, true)
+                intent.putExtra(Constant.MAX_NUMBER, 9)
+                startActivityForResult(intent, Constant.REQUEST_CODE_PICK_IMAGE)
+            })
+            videoItemEvent.observe(this@FileMainFragment, Observer {
+                val intent = Intent(activity!!.application, VideoPickActivity::class.java)
+                intent.putExtra(VideoPickActivity.IS_NEED_CAMERA, true)
+                intent.putExtra(Constant.MAX_NUMBER, 9)
+                startActivityForResult(intent, Constant.REQUEST_CODE_PICK_VIDEO)
+            })
+            audioItemEvent.observe(this@FileMainFragment, Observer {
+                val intent = Intent(activity!!.application, AudioPickActivity::class.java)
+                intent.putExtra(AudioPickActivity.IS_NEED_RECORDER, true)
+                intent.putExtra(Constant.MAX_NUMBER, 9)
+                startActivityForResult(intent, Constant.REQUEST_CODE_PICK_AUDIO)
+            })
+            docItemEvent.observe(this@FileMainFragment, Observer {
+                val intent = Intent(activity!!.application, NormalFilePickActivity::class.java)
+                intent.putExtra(NormalFilePickActivity.SUFFIX, arrayOf("xlsx", "xls", "doc", "docx", "ppt", "pptx", "pdf"))
+                intent.putExtra(Constant.MAX_NUMBER, 9)
+                startActivityForResult(intent, Constant.REQUEST_CODE_PICK_FILE)
+            })
+        }
     }
 }

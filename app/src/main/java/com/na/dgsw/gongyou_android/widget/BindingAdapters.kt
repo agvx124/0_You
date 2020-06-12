@@ -1,5 +1,7 @@
 package com.na.dgsw.gongyou_android.widget
 
+import android.widget.AdapterView
+import android.widget.ListView
 import androidx.databinding.BindingAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -14,3 +16,7 @@ fun setOnNavigationItemSelected(view: BottomNavigationView, listener: BottomNavi
     view.setOnNavigationItemSelectedListener(listener)
 }
 
+@BindingAdapter("onItemSelected")
+fun setOnItemSelected(view: ListView, listener: AdapterView.OnItemSelectedListener) {
+    view.onItemSelectedListener = listener
+}
