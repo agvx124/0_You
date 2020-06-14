@@ -19,15 +19,10 @@ import kotlinx.android.synthetic.main.fragment_file.*
  * skehdgur8591@naver.com
  */
 
-class MainViewModel(application: Application): BaseViewModel<Any>(application), BottomNavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemSelectedListener {
+class MainViewModel(application: Application): BaseViewModel<Any>(application), BottomNavigationView.OnNavigationItemSelectedListener {
 
     val storageItemEvent = SingleLiveEvent<Unit>()
     val fileItemEvent = SingleLiveEvent<Unit>()
-
-    val imgItemEvent = SingleLiveEvent<Unit>()
-    val videoItemEvent = SingleLiveEvent<Unit>()
-    val audioItemEvent = SingleLiveEvent<Unit>()
-    val docItemEvent = SingleLiveEvent<Unit>()
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -41,21 +36,6 @@ class MainViewModel(application: Application): BaseViewModel<Any>(application), 
             }
         }
         return false
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-    }
-
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val selectedItem = parent!!.getItemAtPosition(position) as FileKind
-
-        when (selectedItem.name) {
-            "이미지" -> imgItemEvent.call()
-            "비디오" -> videoItemEvent.call()
-            "오디오" -> audioItemEvent.call()
-            "문서" -> docItemEvent.call()
-        }
-
     }
 
 }

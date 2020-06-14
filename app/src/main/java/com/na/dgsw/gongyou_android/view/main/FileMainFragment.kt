@@ -1,15 +1,14 @@
 package com.na.dgsw.gongyou_android.view.main
 
 import android.content.Intent
-import androidx.lifecycle.Observer
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.base.BaseFragment
 import com.na.dgsw.gongyou_android.data.dto.FileKind
 import com.na.dgsw.gongyou_android.databinding.FragmentFileBinding
 import com.na.dgsw.gongyou_android.view.send.SendActivity
-import com.na.dgsw.gongyou_android.viewmodel.MainViewModel
-import com.na.dgsw.gongyou_android.widget.FileKindListAdapter
+import com.na.dgsw.gongyou_android.viewmodel.FileMainViewModel
+import com.na.dgsw.gongyou_android.widget.recycler.adapter.FileKindListAdapter
 import com.vincent.filepicker.Constant
 import com.vincent.filepicker.activity.AudioPickActivity
 import com.vincent.filepicker.activity.ImagePickActivity
@@ -19,7 +18,6 @@ import com.vincent.filepicker.filter.entity.AudioFile
 import com.vincent.filepicker.filter.entity.ImageFile
 import com.vincent.filepicker.filter.entity.NormalFile
 import com.vincent.filepicker.filter.entity.VideoFile
-import kotlinx.android.synthetic.main.fragment_file.*
 import java.lang.StringBuilder
 
 
@@ -29,18 +27,10 @@ import java.lang.StringBuilder
  */
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class FileMainFragment : BaseFragment<FragmentFileBinding, MainViewModel>() {
+class FileMainFragment : BaseFragment<FragmentFileBinding, FileMainViewModel>() {
 
-    // ListView SET
-    private var fileKindList = arrayListOf(
-        FileKind("ic_image", "이미지"),
-        FileKind("ic_video", "비디오"),
-        FileKind("ic_audio", "오디오"),
-        FileKind("ic_document", "문서")
-    )
-
-    override val viewModelClass: Class<MainViewModel>
-        get() = MainViewModel::class.java
+    override val viewModelClass: Class<FileMainViewModel>
+        get() = FileMainViewModel::class.java
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_file
@@ -51,8 +41,43 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, MainViewModel>() {
     }
 
     override fun setUp() {
-        val fileKindListAdapter = FileKindListAdapter(activity!!.applicationContext, fileKindList)
+        val fileKindListAdapter =
+            FileKindListAdapter(
+                activity!!.applicationContext,
+                fileKindList
+            )
         binding.listView.adapter = fileKindListAdapter
+
+        binding.listView.setOnItemClickListener { parent, view, position, id ->
+            val selectedItem = listView.getItemAtPosition(position) as FileKind
+
+            when (selectedItem.name) {
+                "이미지" -> {
+                    val intent = Intent(activity!!.application, ImagePickActivity::class.java)
+                    intent.putExtra(ImagePickActivity.IS_NEED_CAMERA, true)
+                    intent.putExtra(Constant.MAX_NUMBER, 9)
+                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_IMAGE)
+                }
+                "비디오" -> {
+                    val intent = Intent(activity!!.application, VideoPickActivity::class.java)
+                    intent.putExtra(VideoPickActivity.IS_NEED_CAMERA, true)
+                    intent.putExtra(Constant.MAX_NUMBER, 9)
+                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_VIDEO)
+                }
+                "오디오" -> {
+                    val intent = Intent(activity!!.application, AudioPickActivity::class.java)
+                    intent.putExtra(AudioPickActivity.IS_NEED_RECORDER, true)
+                    intent.putExtra(Constant.MAX_NUMBER, 9)
+                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_AUDIO)
+                }
+                "문서" -> {
+                    val intent = Intent(activity!!.application, NormalFilePickActivity::class.java)
+                    intent.putExtra(NormalFilePickActivity.SUFFIX, arrayOf("xlsx", "xls", "doc", "docx", "ppt", "pptx", "pdf"))
+                    intent.putExtra(Constant.MAX_NUMBER, 9)
+                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_FILE)
+                }
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -119,30 +144,7 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, MainViewModel>() {
 
     override fun observerViewModel() {
         with(viewModel) {
-            imgItemEvent.observe(this@FileMainFragment, Observer {
-                val intent = Intent(activity!!.application, ImagePickActivity::class.java)
-                intent.putExtra(ImagePickActivity.IS_NEED_CAMERA, true)
-                intent.putExtra(Constant.MAX_NUMBER, 9)
-                startActivityForResult(intent, Constant.REQUEST_CODE_PICK_IMAGE)
-            })
-            videoItemEvent.observe(this@FileMainFragment, Observer {
-                val intent = Intent(activity!!.application, VideoPickActivity::class.java)
-                intent.putExtra(VideoPickActivity.IS_NEED_CAMERA, true)
-                intent.putExtra(Constant.MAX_NUMBER, 9)
-                startActivityForResult(intent, Constant.REQUEST_CODE_PICK_VIDEO)
-            })
-            audioItemEvent.observe(this@FileMainFragment, Observer {
-                val intent = Intent(activity!!.application, AudioPickActivity::class.java)
-                intent.putExtra(AudioPickActivity.IS_NEED_RECORDER, true)
-                intent.putExtra(Constant.MAX_NUMBER, 9)
-                startActivityForResult(intent, Constant.REQUEST_CODE_PICK_AUDIO)
-            })
-            docItemEvent.observe(this@FileMainFragment, Observer {
-                val intent = Intent(activity!!.application, NormalFilePickActivity::class.java)
-                intent.putExtra(NormalFilePickActivity.SUFFIX, arrayOf("xlsx", "xls", "doc", "docx", "ppt", "pptx", "pdf"))
-                intent.putExtra(Constant.MAX_NUMBER, 9)
-                startActivityForResult(intent, Constant.REQUEST_CODE_PICK_FILE)
-            })
+
         }
     }
 }

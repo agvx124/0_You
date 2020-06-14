@@ -3,7 +3,10 @@ package com.na.dgsw.gongyou_android.widget
 import android.widget.AdapterView
 import android.widget.ListView
 import androidx.databinding.BindingAdapter
+import androidx.databinding.ObservableArrayList
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.na.dgsw.gongyou_android.data.dto.FileKind
 
 
 /**
@@ -11,12 +14,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  * skehdgur8591@naver.com
  */
 
-@BindingAdapter("onNavigationItemSelected")
-fun setOnNavigationItemSelected(view: BottomNavigationView, listener: BottomNavigationView.OnNavigationItemSelectedListener) {
-    view.setOnNavigationItemSelectedListener(listener)
+object BindingAdapters {
+
+    @JvmStatic
+    @BindingAdapter("onNavigationItemSelected")
+    fun setOnNavigationItemSelected(view: BottomNavigationView, listener: BottomNavigationView.OnNavigationItemSelectedListener) {
+        view.setOnNavigationItemSelectedListener(listener)
+    }
+
+    @JvmStatic
+    @BindingAdapter("bind:item")
+    fun bindItem(recyclerView: RecyclerView, fileKindList: ObservableArrayList<FileKind>) {
+
+    }
 }
 
-@BindingAdapter("onItemSelected")
-fun setOnItemSelected(view: ListView, listener: AdapterView.OnItemSelectedListener) {
-    view.onItemSelectedListener = listener
-}
