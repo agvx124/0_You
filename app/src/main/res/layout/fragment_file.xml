@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/file_kind_list_item"
-            android:background="#FFFFFF" />
+            android:background="#FFFFFF"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

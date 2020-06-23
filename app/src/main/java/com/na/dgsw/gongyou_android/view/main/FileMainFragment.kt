@@ -1,6 +1,8 @@
 package com.na.dgsw.gongyou_android.view.main
 
 import android.content.Intent
+import androidx.databinding.ObservableArrayList
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.base.BaseFragment
@@ -32,6 +34,21 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, FileMainViewModel>() 
     override val viewModelClass: Class<FileMainViewModel>
         get() = FileMainViewModel::class.java
 
+    private val fileKindList = arrayListOf<FileKind>()
+
+    private fun setFileKindListData(): List<FileKind> {
+        fileKindList.add(FileKind(getImageId("ic_image"), "이미지"))
+        fileKindList.add(FileKind(getImageId("ic_video"), "비디오"))
+        fileKindList.add(FileKind(getImageId("ic_audio"), "오디오"))
+        fileKindList.add(FileKind(getImageId("ic_document"), "문서"))
+
+        return fileKindList
+    }
+
+    private fun getImageId(imageName: String): Int {
+        return requireContext().resources.getIdentifier("drawable/" + imageName, null, requireContext().packageName)
+    }
+
     override fun getLayoutId(): Int {
         return R.layout.fragment_file
     }
@@ -41,43 +58,45 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, FileMainViewModel>() 
     }
 
     override fun setUp() {
-        val fileKindListAdapter =
-            FileKindListAdapter(
-                activity!!.applicationContext,
-                fileKindList
-            )
-        binding.listView.adapter = fileKindListAdapter
+//        val fileKindListAdapter =
+//            FileKindListAdapter(
+//                activity!!.applicationContext,
+//                fileKindList
+//            )
+//        binding.listView.adapter = fileKindListAdapter
+//
+//        binding.listView.setOnItemClickListener { parent, view, position, id ->
+//            val selectedItem = listView.getItemAtPosition(position) as FileKind
+//
+//            when (selectedItem.name) {
+//                "이미지" -> {
+//                    val intent = Intent(activity!!.application, ImagePickActivity::class.java)
+//                    intent.putExtra(ImagePickActivity.IS_NEED_CAMERA, true)
+//                    intent.putExtra(Constant.MAX_NUMBER, 9)
+//                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_IMAGE)
+//                }
+//                "비디오" -> {
+//                    val intent = Intent(activity!!.application, VideoPickActivity::class.java)
+//                    intent.putExtra(VideoPickActivity.IS_NEED_CAMERA, true)
+//                    intent.putExtra(Constant.MAX_NUMBER, 9)
+//                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_VIDEO)
+//                }
+//                "오디오" -> {
+//                    val intent = Intent(activity!!.application, AudioPickActivity::class.java)
+//                    intent.putExtra(AudioPickActivity.IS_NEED_RECORDER, true)
+//                    intent.putExtra(Constant.MAX_NUMBER, 9)
+//                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_AUDIO)
+//                }
+//                "문서" -> {
+//                    val intent = Intent(activity!!.application, NormalFilePickActivity::class.java)
+//                    intent.putExtra(NormalFilePickActivity.SUFFIX, arrayOf("xlsx", "xls", "doc", "docx", "ppt", "pptx", "pdf"))
+//                    intent.putExtra(Constant.MAX_NUMBER, 9)
+//                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_FILE)
+//                }
+//            }
+//        }
 
-        binding.listView.setOnItemClickListener { parent, view, position, id ->
-            val selectedItem = listView.getItemAtPosition(position) as FileKind
-
-            when (selectedItem.name) {
-                "이미지" -> {
-                    val intent = Intent(activity!!.application, ImagePickActivity::class.java)
-                    intent.putExtra(ImagePickActivity.IS_NEED_CAMERA, true)
-                    intent.putExtra(Constant.MAX_NUMBER, 9)
-                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_IMAGE)
-                }
-                "비디오" -> {
-                    val intent = Intent(activity!!.application, VideoPickActivity::class.java)
-                    intent.putExtra(VideoPickActivity.IS_NEED_CAMERA, true)
-                    intent.putExtra(Constant.MAX_NUMBER, 9)
-                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_VIDEO)
-                }
-                "오디오" -> {
-                    val intent = Intent(activity!!.application, AudioPickActivity::class.java)
-                    intent.putExtra(AudioPickActivity.IS_NEED_RECORDER, true)
-                    intent.putExtra(Constant.MAX_NUMBER, 9)
-                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_AUDIO)
-                }
-                "문서" -> {
-                    val intent = Intent(activity!!.application, NormalFilePickActivity::class.java)
-                    intent.putExtra(NormalFilePickActivity.SUFFIX, arrayOf("xlsx", "xls", "doc", "docx", "ppt", "pptx", "pdf"))
-                    intent.putExtra(Constant.MAX_NUMBER, 9)
-                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_FILE)
-                }
-            }
-        }
+        setRecyclerView()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -146,5 +165,13 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, FileMainViewModel>() 
         with(viewModel) {
 
         }
+    }
+
+    private fun setRecyclerView() {
+        val fileKindListAdapter = FileKindListAdapter(requireContext())
+        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerview.adapter = fileKindListAdapter
+        fileKindListAdapter.fileKindList = setFileKindListData()
+        fileKindListAdapter.notifyDataSetChanged()
     }
 }

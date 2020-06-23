@@ -6,4 +6,4 @@ package com.na.dgsw.gongyou_android.data.dto
  * skehdgur8591@naver.com
  */
 
-class FileKind (val photo: String, val name: String)
+class FileKind (val photo: Int, val name: String)
