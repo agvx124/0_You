@@ -4,8 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:duplicateParentState="true"
+        android:clickable="true">
 
         <ImageView
             android:id="@+id/kind_img"
@@ -17,7 +20,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/ic_launcher"
+            android:duplicateParentState="true"/>
 
         <TextView
             android:id="@+id/kind_textView"
@@ -32,7 +36,8 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/kind_img"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:duplicateParentState="true"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

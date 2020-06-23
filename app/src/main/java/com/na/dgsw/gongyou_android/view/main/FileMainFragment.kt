@@ -1,7 +1,7 @@
 package com.na.dgsw.gongyou_android.view.main
 
 import android.content.Intent
-import androidx.databinding.ObservableArrayList
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
@@ -10,6 +10,7 @@ import com.na.dgsw.gongyou_android.data.dto.FileKind
 import com.na.dgsw.gongyou_android.databinding.FragmentFileBinding
 import com.na.dgsw.gongyou_android.view.send.SendActivity
 import com.na.dgsw.gongyou_android.viewmodel.FileMainViewModel
+import com.na.dgsw.gongyou_android.widget.recycler.OnItemClickListener
 import com.na.dgsw.gongyou_android.widget.recycler.adapter.FileKindListAdapter
 import com.vincent.filepicker.Constant
 import com.vincent.filepicker.activity.AudioPickActivity
@@ -20,6 +21,7 @@ import com.vincent.filepicker.filter.entity.AudioFile
 import com.vincent.filepicker.filter.entity.ImageFile
 import com.vincent.filepicker.filter.entity.NormalFile
 import com.vincent.filepicker.filter.entity.VideoFile
+import okhttp3.internal.addHeaderLenient
 import java.lang.StringBuilder
 
 
@@ -33,6 +35,8 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, FileMainViewModel>() 
 
     override val viewModelClass: Class<FileMainViewModel>
         get() = FileMainViewModel::class.java
+
+
 
     private val fileKindList = arrayListOf<FileKind>()
 
@@ -58,43 +62,51 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, FileMainViewModel>() 
     }
 
     override fun setUp() {
-//        val fileKindListAdapter =
-//            FileKindListAdapter(
-//                activity!!.applicationContext,
-//                fileKindList
-//            )
-//        binding.listView.adapter = fileKindListAdapter
+//        binding.recyclerview.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener{
+//            override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
 //
-//        binding.listView.setOnItemClickListener { parent, view, position, id ->
-//            val selectedItem = listView.getItemAtPosition(position) as FileKind
-//
-//            when (selectedItem.name) {
-//                "이미지" -> {
-//                    val intent = Intent(activity!!.application, ImagePickActivity::class.java)
-//                    intent.putExtra(ImagePickActivity.IS_NEED_CAMERA, true)
-//                    intent.putExtra(Constant.MAX_NUMBER, 9)
-//                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_IMAGE)
-//                }
-//                "비디오" -> {
-//                    val intent = Intent(activity!!.application, VideoPickActivity::class.java)
-//                    intent.putExtra(VideoPickActivity.IS_NEED_CAMERA, true)
-//                    intent.putExtra(Constant.MAX_NUMBER, 9)
-//                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_VIDEO)
-//                }
-//                "오디오" -> {
-//                    val intent = Intent(activity!!.application, AudioPickActivity::class.java)
-//                    intent.putExtra(AudioPickActivity.IS_NEED_RECORDER, true)
-//                    intent.putExtra(Constant.MAX_NUMBER, 9)
-//                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_AUDIO)
-//                }
-//                "문서" -> {
-//                    val intent = Intent(activity!!.application, NormalFilePickActivity::class.java)
-//                    intent.putExtra(NormalFilePickActivity.SUFFIX, arrayOf("xlsx", "xls", "doc", "docx", "ppt", "pptx", "pdf"))
-//                    intent.putExtra(Constant.MAX_NUMBER, 9)
-//                    startActivityForResult(intent, Constant.REQUEST_CODE_PICK_FILE)
-//                }
 //            }
-//        }
+//
+//            override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+//                val child = rv.findChildViewUnder(e.x, e.y)
+//                val position = rv.getChildLayoutPosition(child!!)
+////                val selectedItem = rv.getItemDecorationAt(position) as FileKind
+//
+//                when (position) {
+//                    0 -> {
+//                        val intent = Intent(activity!!.application, ImagePickActivity::class.java)
+//                        intent.putExtra(ImagePickActivity.IS_NEED_CAMERA, true)
+//                        intent.putExtra(Constant.MAX_NUMBER, 9)
+//                        startActivityForResult(intent, Constant.REQUEST_CODE_PICK_IMAGE)
+//                    }
+//                    1 -> {
+//                        val intent = Intent(activity!!.application, VideoPickActivity::class.java)
+//                        intent.putExtra(VideoPickActivity.IS_NEED_CAMERA, true)
+//                        intent.putExtra(Constant.MAX_NUMBER, 9)
+//                        startActivityForResult(intent, Constant.REQUEST_CODE_PICK_VIDEO)
+//                    }
+//                    2 -> {
+//                        val intent = Intent(activity!!.application, AudioPickActivity::class.java)
+//                        intent.putExtra(AudioPickActivity.IS_NEED_RECORDER, true)
+//                        intent.putExtra(Constant.MAX_NUMBER, 9)
+//                        startActivityForResult(intent, Constant.REQUEST_CODE_PICK_AUDIO)
+//                    }
+//                    3 -> {
+//                        val intent = Intent(activity!!.application, NormalFilePickActivity::class.java)
+//                        intent.putExtra(NormalFilePickActivity.SUFFIX, arrayOf("xlsx", "xls", "doc", "docx", "ppt", "pptx", "pdf"))
+//                        intent.putExtra(Constant.MAX_NUMBER, 9)
+//                        startActivityForResult(intent, Constant.REQUEST_CODE_PICK_FILE)
+//                    }
+//                }
+//
+//                return false
+//            }
+//
+//            override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+//
+//            }
+//
+//        })
 
         setRecyclerView()
     }
@@ -169,6 +181,40 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, FileMainViewModel>() 
 
     private fun setRecyclerView() {
         val fileKindListAdapter = FileKindListAdapter(requireContext())
+
+        val onItemClickListener: OnItemClickListener = object : OnItemClickListener {
+            override fun onItemClick(v: View, position: Int) {
+                when (position) {
+                    0 -> {
+                        val intent = Intent(activity!!.application, ImagePickActivity::class.java)
+                        intent.putExtra(ImagePickActivity.IS_NEED_CAMERA, true)
+                        intent.putExtra(Constant.MAX_NUMBER, 9)
+                        startActivityForResult(intent, Constant.REQUEST_CODE_PICK_IMAGE)
+                    }
+                    1 -> {
+                        val intent = Intent(activity!!.application, VideoPickActivity::class.java)
+                        intent.putExtra(VideoPickActivity.IS_NEED_CAMERA, true)
+                        intent.putExtra(Constant.MAX_NUMBER, 9)
+                        startActivityForResult(intent, Constant.REQUEST_CODE_PICK_VIDEO)
+                    }
+                    2 -> {
+                        val intent = Intent(activity!!.application, AudioPickActivity::class.java)
+                        intent.putExtra(AudioPickActivity.IS_NEED_RECORDER, true)
+                        intent.putExtra(Constant.MAX_NUMBER, 9)
+                        startActivityForResult(intent, Constant.REQUEST_CODE_PICK_AUDIO)
+                    }
+                    3 -> {
+                        val intent = Intent(activity!!.application, NormalFilePickActivity::class.java)
+                        intent.putExtra(NormalFilePickActivity.SUFFIX, arrayOf("xlsx", "xls", "doc", "docx", "ppt", "pptx", "pdf"))
+                        intent.putExtra(Constant.MAX_NUMBER, 9)
+                        startActivityForResult(intent, Constant.REQUEST_CODE_PICK_FILE)
+                    }
+                }
+            }
+        }
+
+        fileKindListAdapter.setOnItemClickListener(onItemClickListener)
+
         binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerview.adapter = fileKindListAdapter
         fileKindListAdapter.fileKindList = setFileKindListData()
