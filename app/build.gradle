@@ -104,6 +104,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
 
+    // QRCode Creator
+    implementation 'com.github.SumiMakito:AwesomeQRCode:1.2.0'
+
     // Apache Collections
 //    implementation 'org.Apache.commons:commons-collections4:4.3'
 

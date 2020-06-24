@@ -25,7 +25,7 @@ import com.na.dgsw.gongyou_android.viewmodel.SendViewModel
 
 class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
 
-    private val userSaveNum = (0 .. 9999999).random()
+    private val fileEigenNum = (0 .. 999999).random()
     private val arrayUri: ArrayList<Uri> = ArrayList()
     var arrayUriIndex: ArrayList<String> = ArrayList()
 
@@ -118,7 +118,7 @@ class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
 
             storageReference.putFile(Uri.parse("file://" + filePath.path))
                 .addOnSuccessListener {
-                    viewModel.postUrlUpload(FileRequest("agvx124", userSaveNum, fileName, list.size, ext))
+                    viewModel.postUrlUpload(FileRequest("agvx124", fileEigenNum, fileName, list.size, ext))
                     progressDialog.dismiss()
 
                 }

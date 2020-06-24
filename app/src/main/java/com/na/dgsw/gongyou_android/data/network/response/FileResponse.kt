@@ -8,4 +8,4 @@ import java.io.Serializable
  * skehdgur8591@naver.com
  */
 
-data class FileResponse(var idx: Int, var fileEigenValue: Int, var sendId: String, var filesUrl: String, var fileExt: String, var fileNumbered: String): Serializable
+data class FileResponse(var idx: Int, var fileEigenValue: Int, var senderId: String, var filesUrl: String, var fileExt: String, var fileNumbered: String): Serializable
