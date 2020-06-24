@@ -37,7 +37,6 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, FileMainViewModel>() 
         get() = FileMainViewModel::class.java
 
 
-
     private val fileKindList = arrayListOf<FileKind>()
 
     private fun setFileKindListData(): List<FileKind> {
@@ -62,52 +61,6 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, FileMainViewModel>() 
     }
 
     override fun setUp() {
-//        binding.recyclerview.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener{
-//            override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
-//
-//            }
-//
-//            override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
-//                val child = rv.findChildViewUnder(e.x, e.y)
-//                val position = rv.getChildLayoutPosition(child!!)
-////                val selectedItem = rv.getItemDecorationAt(position) as FileKind
-//
-//                when (position) {
-//                    0 -> {
-//                        val intent = Intent(activity!!.application, ImagePickActivity::class.java)
-//                        intent.putExtra(ImagePickActivity.IS_NEED_CAMERA, true)
-//                        intent.putExtra(Constant.MAX_NUMBER, 9)
-//                        startActivityForResult(intent, Constant.REQUEST_CODE_PICK_IMAGE)
-//                    }
-//                    1 -> {
-//                        val intent = Intent(activity!!.application, VideoPickActivity::class.java)
-//                        intent.putExtra(VideoPickActivity.IS_NEED_CAMERA, true)
-//                        intent.putExtra(Constant.MAX_NUMBER, 9)
-//                        startActivityForResult(intent, Constant.REQUEST_CODE_PICK_VIDEO)
-//                    }
-//                    2 -> {
-//                        val intent = Intent(activity!!.application, AudioPickActivity::class.java)
-//                        intent.putExtra(AudioPickActivity.IS_NEED_RECORDER, true)
-//                        intent.putExtra(Constant.MAX_NUMBER, 9)
-//                        startActivityForResult(intent, Constant.REQUEST_CODE_PICK_AUDIO)
-//                    }
-//                    3 -> {
-//                        val intent = Intent(activity!!.application, NormalFilePickActivity::class.java)
-//                        intent.putExtra(NormalFilePickActivity.SUFFIX, arrayOf("xlsx", "xls", "doc", "docx", "ppt", "pptx", "pdf"))
-//                        intent.putExtra(Constant.MAX_NUMBER, 9)
-//                        startActivityForResult(intent, Constant.REQUEST_CODE_PICK_FILE)
-//                    }
-//                }
-//
-//                return false
-//            }
-//
-//            override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
-//
-//            }
-//
-//        })
-
         setRecyclerView()
     }
 
@@ -181,7 +134,14 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, FileMainViewModel>() 
 
     private fun setRecyclerView() {
         val fileKindListAdapter = FileKindListAdapter(requireContext())
+        recyclerViewSetClickListener(fileKindListAdapter)
+        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerview.adapter = fileKindListAdapter
+        fileKindListAdapter.fileKindList = setFileKindListData()
+        fileKindListAdapter.notifyDataSetChanged()
+    }
 
+    private fun recyclerViewSetClickListener(fileKindListAdapter: FileKindListAdapter) {
         val onItemClickListener: OnItemClickListener = object : OnItemClickListener {
             override fun onItemClick(v: View, position: Int) {
                 when (position) {
@@ -214,10 +174,5 @@ class FileMainFragment : BaseFragment<FragmentFileBinding, FileMainViewModel>() 
         }
 
         fileKindListAdapter.setOnItemClickListener(onItemClickListener)
-
-        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerview.adapter = fileKindListAdapter
-        fileKindListAdapter.fileKindList = setFileKindListData()
-        fileKindListAdapter.notifyDataSetChanged()
     }
 }

@@ -16,15 +16,18 @@ import com.google.firebase.storage.UploadTask
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.base.BaseActivity
+import com.na.dgsw.gongyou_android.data.network.response.FileResponse
 import com.na.dgsw.gongyou_android.data.network.request.FileRequest
 import com.na.dgsw.gongyou_android.databinding.ActivitySendBinding
 import com.na.dgsw.gongyou_android.view.main.MainActivity
+import com.na.dgsw.gongyou_android.view.waitsend.WaitSendActivity
 import com.na.dgsw.gongyou_android.viewmodel.SendViewModel
 
 class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
 
     private val userSaveNum = (0 .. 9999999).random()
     private val arrayUri: ArrayList<Uri> = ArrayList()
+    var arrayUriIndex: ArrayList<String> = ArrayList()
 
     override val viewModelClass: Class<SendViewModel>
         get() = SendViewModel::class.java
@@ -40,8 +43,8 @@ class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
     override fun setUp() {
         val intent = intent
         val dataUrls = intent.getStringExtra("dataUrl")
+        arrayUriIndex = dataUrls.split("\n") as ArrayList<String>
 
-        val arrayUriIndex: ArrayList<String> = dataUrls.split("\n") as ArrayList<String>
         // "" null Check
         for (fileUrl in arrayUriIndex) {
             if (fileUrl == "") arrayUriIndex.remove("")
@@ -57,8 +60,18 @@ class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
 
     override fun observerViewModel() {
         with(viewModel) {
+            val successDataList: ArrayList<FileResponse> = ArrayList()
             onSuccessEvent.observe(this@SendActivity, Observer {
-                Toast.makeText(this@SendActivity, "파일 업로드에 성공하셨습니다.", Toast.LENGTH_SHORT).show()
+                successDataList.add(it)
+
+                if (successDataList.size == arrayUriIndex.size) {
+                    Toast.makeText(this@SendActivity, "파일 업로드에 성공하셨습니다.", Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(this@SendActivity, WaitSendActivity::class.java)
+                    intent.putExtra("dataList", successDataList)
+
+                    startActivity(intent)
+                }
             })
 
             onErrorEvent.observe(this@SendActivity, Observer {

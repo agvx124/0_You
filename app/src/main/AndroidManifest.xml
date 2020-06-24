@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.send.SendActivity"/>
+        <activity android:name=".view.waitsend.WaitSendActivity"></activity>
+        <activity android:name=".view.send.SendActivity" />
         <activity android:name=".view.splash.SplashActivity" />
         <activity android:name=".view.login.LoginActivity" />
         <activity android:name=".view.main.MainActivity">

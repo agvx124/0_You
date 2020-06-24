@@ -36,36 +36,6 @@ class FileKindListAdapter(private val context: Context): RecyclerView.Adapter<Fi
 
     override fun onBindViewHolder(holder: FileKindListViewHolder, position: Int) {
         holder.bind(fileKindList[position])
-
-//        holder.binding.parentLayout.setOnClickListener {
-//            val activity: Activity = context as Activity
-//            when (fileKindList[position].name) {
-//                "이미지" -> {
-//                    val intent = Intent(context.applicationContext, ImagePickActivity::class.java)
-//                    intent.putExtra(ImagePickActivity.IS_NEED_CAMERA, true)
-//                    intent.putExtra(Constant.MAX_NUMBER, 9)
-//                    activity.startActivityForResult(intent, Constant.REQUEST_CODE_PICK_IMAGE)
-//                }
-//                "비디오" -> {
-//                    val intent = Intent(activity!!.application, VideoPickActivity::class.java)
-//                    intent.putExtra(VideoPickActivity.IS_NEED_CAMERA, true)
-//                    intent.putExtra(Constant.MAX_NUMBER, 9)
-//                    activity.startActivityForResult(intent, Constant.REQUEST_CODE_PICK_VIDEO)
-//                }
-//                "오디오" -> {
-//                    val intent = Intent(activity!!.application, AudioPickActivity::class.java)
-//                    intent.putExtra(AudioPickActivity.IS_NEED_RECORDER, true)
-//                    intent.putExtra(Constant.MAX_NUMBER, 9)
-//                    activity.startActivityForResult(intent, Constant.REQUEST_CODE_PICK_AUDIO)
-//                }
-//                "문서" -> {
-//                    val intent = Intent(activity!!.application, NormalFilePickActivity::class.java)
-//                    intent.putExtra(NormalFilePickActivity.SUFFIX, arrayOf("xlsx", "xls", "doc", "docx", "ppt", "pptx", "pdf"))
-//                    intent.putExtra(Constant.MAX_NUMBER, 9)
-//                    activity.startActivityForResult(intent, Constant.REQUEST_CODE_PICK_FILE)
-//                }
-//            }
-//        }
     }
 
     inner class FileKindListViewHolder(val binding: FileKindListItemBinding): RecyclerView.ViewHolder(binding.root) {
