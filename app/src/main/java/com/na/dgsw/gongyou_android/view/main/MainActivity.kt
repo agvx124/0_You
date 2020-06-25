@@ -35,7 +35,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         replaceStorageFragment()
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_titlebar, menu)
         return true
@@ -47,8 +46,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 replaceStorageFragment()
             })
 
-            fileItemEvent.observe(this@MainActivity, Observer {
-                replaceFileFragment()
+            sendFileItemEvent.observe(this@MainActivity, Observer {
+                replaceSendFileFragment()
+            })
+
+            getFileItemEvent.observe(this@MainActivity, Observer {
+                replaceGetFileFragment()
             })
         }
     }
@@ -69,10 +72,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragmentStorage).commit()
     }
 
-    private fun replaceFileFragment() {
-        val fileMainFragment = SendMainFragment()
-        supportActionBar?.title = "파일탐색"
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fileMainFragment).commit()
+    private fun replaceSendFileFragment() {
+        val sendFileMainFragment = SendMainFragment()
+        supportActionBar?.title = "파일보내기"
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, sendFileMainFragment).commit()
+    }
+
+    private fun replaceGetFileFragment() {
+        val getFileMainFragment = GetMainFragment()
+        supportActionBar?.title = "파일받기"
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, getFileMainFragment).commit()
     }
 
 }

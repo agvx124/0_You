@@ -16,7 +16,8 @@ import com.na.dgsw.gongyou_android.utils.SingleLiveEvent
 class MainViewModel(application: Application): BaseViewModel<Any>(application), BottomNavigationView.OnNavigationItemSelectedListener {
 
     val storageItemEvent = SingleLiveEvent<Unit>()
-    val fileItemEvent = SingleLiveEvent<Unit>()
+    val sendFileItemEvent = SingleLiveEvent<Unit>()
+    val getFileItemEvent = SingleLiveEvent<Unit>()
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -25,7 +26,11 @@ class MainViewModel(application: Application): BaseViewModel<Any>(application), 
                 return true
             }
             R.id.file_item -> {
-                fileItemEvent.call()
+                sendFileItemEvent.call()
+                return true
+            }
+            R.id.file_get_item -> {
+                getFileItemEvent.call()
                 return true
             }
         }
