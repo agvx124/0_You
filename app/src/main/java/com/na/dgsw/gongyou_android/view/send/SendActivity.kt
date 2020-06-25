@@ -25,7 +25,7 @@ import com.na.dgsw.gongyou_android.viewmodel.SendViewModel
 
 class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
 
-    private val fileEigenNum = (0 .. 999999).random()
+    private val fileEigenNum = (100000 .. 999999).random()
     private val arrayUri: ArrayList<Uri> = ArrayList()
     var arrayUriIndex: ArrayList<String> = ArrayList()
 
