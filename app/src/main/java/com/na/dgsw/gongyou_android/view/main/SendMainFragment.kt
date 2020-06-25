@@ -9,7 +9,7 @@ import com.na.dgsw.gongyou_android.base.BaseFragment
 import com.na.dgsw.gongyou_android.data.dto.FileKind
 import com.na.dgsw.gongyou_android.databinding.FragmentFileBinding
 import com.na.dgsw.gongyou_android.view.send.SendActivity
-import com.na.dgsw.gongyou_android.viewmodel.FileMainViewModel
+import com.na.dgsw.gongyou_android.viewmodel.SendMainViewModel
 import com.na.dgsw.gongyou_android.widget.recycler.OnItemClickListener
 import com.na.dgsw.gongyou_android.widget.recycler.adapter.FileKindListAdapter
 import com.vincent.filepicker.Constant
@@ -21,7 +21,6 @@ import com.vincent.filepicker.filter.entity.AudioFile
 import com.vincent.filepicker.filter.entity.ImageFile
 import com.vincent.filepicker.filter.entity.NormalFile
 import com.vincent.filepicker.filter.entity.VideoFile
-import okhttp3.internal.addHeaderLenient
 import java.lang.StringBuilder
 
 
@@ -31,10 +30,10 @@ import java.lang.StringBuilder
  */
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class FileMainFragment : BaseFragment<FragmentFileBinding, FileMainViewModel>() {
+class SendMainFragment : BaseFragment<FragmentFileBinding, SendMainViewModel>() {
 
-    override val viewModelClass: Class<FileMainViewModel>
-        get() = FileMainViewModel::class.java
+    override val viewModelClass: Class<SendMainViewModel>
+        get() = SendMainViewModel::class.java
 
 
     private val fileKindList = arrayListOf<FileKind>()

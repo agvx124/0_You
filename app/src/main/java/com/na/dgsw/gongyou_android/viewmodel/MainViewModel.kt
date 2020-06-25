@@ -2,16 +2,10 @@ package com.na.dgsw.gongyou_android.viewmodel
 
 import android.app.Application
 import android.view.MenuItem
-import android.view.View
-import android.widget.AdapterView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.base.BaseViewModel
-import com.na.dgsw.gongyou_android.data.dto.FileKind
 import com.na.dgsw.gongyou_android.utils.SingleLiveEvent
-import com.na.dgsw.gongyou_android.view.main.FileMainFragment
-import com.na.dgsw.gongyou_android.view.main.StorageMainFragment
-import kotlinx.android.synthetic.main.fragment_file.*
 
 
 /**

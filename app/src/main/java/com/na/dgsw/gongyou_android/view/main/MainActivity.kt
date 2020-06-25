@@ -2,24 +2,13 @@ package com.na.dgsw.gongyou_android.view.main
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.os.Build
-import android.os.Environment
-import android.os.StatFs
 import android.view.Menu
-import android.view.MenuItem
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.databinding.ActivityMainBinding
 import com.na.dgsw.gongyou_android.base.BaseActivity
 import com.na.dgsw.gongyou_android.viewmodel.MainViewModel
-import java.io.File
-import java.text.DecimalFormat
-import kotlin.math.log10
-import kotlin.math.pow
 
 /**
  * Created by NA on 2020-04-16
@@ -81,7 +70,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     private fun replaceFileFragment() {
-        val fileMainFragment = FileMainFragment()
+        val fileMainFragment = SendMainFragment()
         supportActionBar?.title = "파일탐색"
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fileMainFragment).commit()
     }

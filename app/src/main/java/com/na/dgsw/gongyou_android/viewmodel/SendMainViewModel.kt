@@ -13,7 +13,7 @@ import com.na.dgsw.gongyou_android.utils.SingleLiveEvent
  * Created by NA on 2020-06-14
  * skehdgur8591@naver.com
  */
-class FileMainViewModel(application: Application): BaseViewModel<Any>(application) {
+class SendMainViewModel(application: Application): BaseViewModel<Any>(application) {
 
 
 
