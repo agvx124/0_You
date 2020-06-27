@@ -67,13 +67,13 @@
 
 
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/qr_create_imageView"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="50dp" 
             android:src="@drawable/ic_qrcode"
-            android:onClick="@{viewModel.qrCodeScannerBtnClick()}"
+            android:onClick="@{() -> viewModel.qrCodeScannerBtnClick()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraint_layout" />
