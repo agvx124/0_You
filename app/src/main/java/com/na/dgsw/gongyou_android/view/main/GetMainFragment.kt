@@ -15,11 +15,6 @@ import com.na.dgsw.gongyou_android.base.BaseFragment
 import com.na.dgsw.gongyou_android.databinding.FragmentGetMainBinding
 import com.na.dgsw.gongyou_android.viewmodel.GetMainViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 /**
  * Created by NA on 2020-04-16
  * skehdgur8591@naver.com
@@ -49,12 +44,18 @@ class GetMainFragment : BaseFragment<FragmentGetMainBinding, GetMainViewModel>()
 
     }
 
-    override fun observerViewModel() {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         with(viewModel) {
-            onQrCodeScannerEvent.observe(this@GetMainFragment, Observer {
+            onQrCodeScannerEvent.observe(viewLifecycleOwner, Observer {
+//                Toast.makeText(getApplication(), "PASS", Toast.LENGTH_SHORT).show()
                 startActivityForResult(Intent(requireActivity(), QrCodeActivity::class.java), REQUEST_CODE_QR_SCAN)
             })
         }
+    }
+
+    override fun observerViewModel() {
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

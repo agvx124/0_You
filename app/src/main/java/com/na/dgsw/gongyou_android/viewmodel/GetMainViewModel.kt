@@ -13,7 +13,6 @@ class GetMainViewModel(application: Application): BaseViewModel<Any>(application
 
     val onQrCodeScannerEvent = SingleLiveEvent<Unit>()
 
-
     fun qrCodeScannerBtnClick() {
         onQrCodeScannerEvent.call()
     }

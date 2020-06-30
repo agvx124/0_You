@@ -17,7 +17,7 @@ import com.na.dgsw.gongyou_android.viewmodel.MainViewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
-    private val permissionList = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    private val permissionList = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
 
     override val viewModelClass: Class<MainViewModel>
         get() = MainViewModel::class.java

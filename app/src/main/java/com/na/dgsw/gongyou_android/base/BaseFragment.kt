@@ -62,6 +62,11 @@ abstract class BaseFragment<T: ViewDataBinding, V: BaseViewModel<*>> : Fragment(
         setUp()
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+    }
+
     fun getBaseActivity() : BaseActivity<*, *>? {
         return mActivity
     }

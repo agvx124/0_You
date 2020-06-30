@@ -75,7 +75,7 @@ class WaitSendActivity : BaseActivity<ActivityWaitSendBinding, WaitSendViewModel
         var result = StringBuilder()
 
         for (i in 0.. str.length) {
-            if ((i+1) % 2 == 0) {
+            if ((i + 1) % 2 == 0) {
                 result.append(str.get(i) + " ")
                 if (i + 1 == str.length) break
             }
