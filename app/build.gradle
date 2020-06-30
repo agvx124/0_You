@@ -108,7 +108,8 @@ dependencies {
     // QRCode Creator
     implementation 'com.github.SumiMakito:AwesomeQRCode:1.2.0'
     // QRCode Scanner
-    implementation 'com.github.blikoon:QRCodeScanner:0.1.2'
+    implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+    implementation 'com.google.zxing:core:3.3.0'
 
     // Apache Collections
 //    implementation 'org.Apache.commons:commons-collections4:4.3'
