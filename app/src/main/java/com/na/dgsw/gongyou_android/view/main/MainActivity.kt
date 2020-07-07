@@ -1,6 +1,7 @@
 package com.na.dgsw.gongyou_android.view.main
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.view.Menu
 import androidx.lifecycle.Observer
@@ -8,6 +9,8 @@ import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.databinding.ActivityMainBinding
 import com.na.dgsw.gongyou_android.base.BaseActivity
+import com.na.dgsw.gongyou_android.data.dto.ActivityResultEvent
+import com.na.dgsw.gongyou_android.data.dto.EventBus
 import com.na.dgsw.gongyou_android.viewmodel.MainViewModel
 
 /**
@@ -54,6 +57,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 replaceGetFileFragment()
             })
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+//        super.onActivityResult(requestCode, resultCode, data)
+//        super.onActivityResult(requestCode, resultCode, data)
+        EventBus.getInstance().post(ActivityResultEvent.create(requestCode, resultCode, data))
     }
 
     private fun checkPermission() {

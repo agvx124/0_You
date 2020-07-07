@@ -4,10 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateUtils
 import androidx.lifecycle.Observer
-import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
-import com.github.sumimakito.awesomeqr.RenderResult
-import com.github.sumimakito.awesomeqr.option.RenderOption
-import com.github.sumimakito.awesomeqr.option.color.Color
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.Constants
 import com.na.dgsw.gongyou_android.R
@@ -41,14 +40,11 @@ class WaitSendActivity : BaseActivity<ActivityWaitSendBinding, WaitSendViewModel
 
         binding.eigenValueTextView.text = setTwoCharSpacing(dataList.get(0).fileEigenValue.toString())
 
-        var renderOption = RenderOption()
-        renderOption = setRenderOption(renderOption)
-
-        // QR Code Create
-        AwesomeQrRenderer.renderAsync(renderOption, { result ->
-            if (result.bitmap != null) binding.qrCreateImageView.setImageBitmap(result.bitmap)
-        }, { exception -> exception.printStackTrace() })
-
+        val multiFormatWriter = MultiFormatWriter()
+        val bitMatrix = multiFormatWriter.encode(Constants.DEFAULT_HOST, BarcodeFormat.QR_CODE, 200, 200)
+        val barcodeEncode = BarcodeEncoder()
+        val bitmap = barcodeEncode.createBitmap(bitMatrix)
+        binding.qrCreateImageView.setImageBitmap(bitmap)
     }
 
     override fun observerViewModel() {
@@ -57,18 +53,6 @@ class WaitSendActivity : BaseActivity<ActivityWaitSendBinding, WaitSendViewModel
                 binding.remainTimeTextView.text = DateUtils.formatElapsedTime(it)
             })
         }
-    }
-
-    private fun setRenderOption(renderOption: RenderOption): RenderOption {
-        // 해당 URL 주소
-        renderOption.content = Constants.DEFAULT_HOST + ""
-        renderOption.size = 800
-        renderOption.borderWidth = 20
-        renderOption.patternScale = 0.35f
-        renderOption.roundedPatterns = true
-        renderOption.clearBorder = true
-
-        return renderOption
     }
 
     private fun setTwoCharSpacing(str: String): String {

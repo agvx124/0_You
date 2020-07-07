@@ -8,13 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import com.google.zxing.client.android.Intents
 import com.google.zxing.integration.android.IntentIntegrator
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.base.BaseFragment
+import com.na.dgsw.gongyou_android.data.dto.ActivityResultEvent
+import com.na.dgsw.gongyou_android.data.dto.EventBus
 import com.na.dgsw.gongyou_android.databinding.FragmentGetMainBinding
 import com.na.dgsw.gongyou_android.view.scan.ScanActivity
 import com.na.dgsw.gongyou_android.viewmodel.GetMainViewModel
+import com.squareup.otto.Subscribe
 
 /**
  * Created by NA on 2020-04-16
@@ -28,8 +32,6 @@ import com.na.dgsw.gongyou_android.viewmodel.GetMainViewModel
  */
 class GetMainFragment : BaseFragment<FragmentGetMainBinding, GetMainViewModel>() {
 
-    private val REQUEST_CODE_QR_SCAN = 101
-
     override val viewModelClass: Class<GetMainViewModel>
         get() = GetMainViewModel::class.java
 
@@ -42,7 +44,7 @@ class GetMainFragment : BaseFragment<FragmentGetMainBinding, GetMainViewModel>()
     }
 
     override fun setUp() {
-
+        EventBus.getInstance().register(this)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -60,33 +62,14 @@ class GetMainFragment : BaseFragment<FragmentGetMainBinding, GetMainViewModel>()
 
     }
 
-    fun onActivityResultEvent(event: ActivityResu)
+    @SuppressWarnings("unused")
+    @Subscribe
+    fun onActivityResultEvent(event: ActivityResultEvent) {
+        onActivityResult(event.requestCode, event.resultCode, event.data)
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == IntentIntegrator.REQUEST_CODE) {
-            val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-            if (result == null) {
-                // 취소됨
-                Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show();
-            } else {
-                // 스캔된 QRCode --> result.getContents()
-                Toast.makeText(context, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-
-//        if (requestCode == REQUEST_CODE_QR_SCAN) {
-//            if (data == null) {
-//                Toast.makeText(requireContext(), "QR 코드 내용이 없습니다.", Toast.LENGTH_LONG).show()
-//                return
-//            }
-//
-//            val result = data.getStringExtra("com.blikoon.qrcodescanner.got_qr_scan_relult")
-//            Toast.makeText(requireContext(), result, Toast.LENGTH_LONG).show()
-//        }
+        Toast.makeText(context, "Scanned: " + data!!.getStringExtra(Intents.Scan.RESULT), Toast.LENGTH_LONG).show()
     }
 
     private fun intentIntegrator() {

@@ -105,12 +105,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
 
-    // QRCode Creator
-    implementation 'com.github.SumiMakito:AwesomeQRCode:1.2.0'
-    // QRCode Scanner
+    // QRCode Creator / Scanner
     implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
     implementation 'com.google.zxing:core:3.3.0'
 
+    implementation 'com.squareup:otto:1.3.8'
     // Apache Collections
 //    implementation 'org.Apache.commons:commons-collections4:4.3'
 
