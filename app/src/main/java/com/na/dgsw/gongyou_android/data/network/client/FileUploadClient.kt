@@ -23,4 +23,8 @@ class FileUploadClient: BaseClient<FileService>() {
         return service.postUrlUpload(fileRequest).map(getResponseObjectsFunction())
     }
 
+    fun getFiles(fileEigenValue: Int): Single<List<String>> {
+        return service.getFiles(fileEigenValue).map(getResponseObjectsFunction())
+    }
+
 }

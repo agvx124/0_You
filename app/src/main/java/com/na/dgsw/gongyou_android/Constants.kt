@@ -13,5 +13,5 @@ package com.na.dgsw.gongyou_android
 // const hostname = "10.72.160.18";
 
 object Constants {
-    val DEFAULT_HOST = "http://10.72.160.18:3000/"
+    val DEFAULT_HOST = "http://10.80.163.88:3000/"
 }

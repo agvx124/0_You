@@ -5,7 +5,9 @@ import com.na.dgsw.gongyou_android.data.network.response.FileResponse
 import io.reactivex.Single
 import com.na.dgsw.gongyou_android.data.network.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 
 /**
@@ -20,4 +22,8 @@ interface FileService {
         @Body fileRequest: FileRequest
     ): Single<retrofit2.Response<Response<FileResponse>>>
 
+    @GET("v1/upload/getFiles/{file_eigen_value}")
+    fun getFiles(
+        @Path("file_eigen_value") fileEigenValue: Int
+    ): Single<retrofit2.Response<Response<List<String>>>>
 }

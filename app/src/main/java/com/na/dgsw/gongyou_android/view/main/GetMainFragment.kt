@@ -49,11 +49,15 @@ class GetMainFragment : BaseFragment<FragmentGetMainBinding, GetMainViewModel>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        // Fragment viewmodel은 onActivityCreated 로 받아야함 ㅠㅠ
         with(viewModel) {
             onQrCodeScannerEvent.observe(viewLifecycleOwner, Observer {
                 intentIntegrator()
-//                Toast.makeText(getApplication(), "PASS", Toast.LENGTH_SHORT).show()
-//                startActivityForResult(Intent(requireActivity(), QrCodeActivity::class.java), REQUEST_CODE_QR_SCAN)
+            })
+
+            onSuccessEvent.observe(viewLifecycleOwner, Observer {
+                Toast.makeText(context, "스캔을 완료하였습니다.", Toast.LENGTH_SHORT).show()
             })
         }
     }
@@ -69,6 +73,17 @@ class GetMainFragment : BaseFragment<FragmentGetMainBinding, GetMainViewModel>()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+
+        if (result != null) {
+            if (result.contents == null) {
+                Toast.makeText(context, "취소하셨습니다.", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                viewModel.getFiles(result.contents.toInt())
+            }
+        }
+
         Toast.makeText(context, "Scanned: " + data!!.getStringExtra(Intents.Scan.RESULT), Toast.LENGTH_LONG).show()
     }
 

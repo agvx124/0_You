@@ -41,7 +41,7 @@ class WaitSendActivity : BaseActivity<ActivityWaitSendBinding, WaitSendViewModel
         binding.eigenValueTextView.text = setTwoCharSpacing(dataList.get(0).fileEigenValue.toString())
 
         val multiFormatWriter = MultiFormatWriter()
-        val bitMatrix = multiFormatWriter.encode(Constants.DEFAULT_HOST, BarcodeFormat.QR_CODE, 200, 200)
+        val bitMatrix = multiFormatWriter.encode(dataList.get(0).fileEigenValue.toString(), BarcodeFormat.QR_CODE, 200, 200)
         val barcodeEncode = BarcodeEncoder()
         val bitmap = barcodeEncode.createBitmap(bitMatrix)
         binding.qrCreateImageView.setImageBitmap(bitmap)
