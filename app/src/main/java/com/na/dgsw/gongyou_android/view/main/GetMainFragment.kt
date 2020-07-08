@@ -16,6 +16,7 @@ import com.na.dgsw.gongyou_android.base.BaseFragment
 import com.na.dgsw.gongyou_android.data.dto.ActivityResultEvent
 import com.na.dgsw.gongyou_android.data.dto.EventBus
 import com.na.dgsw.gongyou_android.databinding.FragmentGetMainBinding
+import com.na.dgsw.gongyou_android.view.getfile.GetFileActivity
 import com.na.dgsw.gongyou_android.view.scan.ScanActivity
 import com.na.dgsw.gongyou_android.viewmodel.GetMainViewModel
 import com.squareup.otto.Subscribe
@@ -57,7 +58,11 @@ class GetMainFragment : BaseFragment<FragmentGetMainBinding, GetMainViewModel>()
             })
 
             onSuccessEvent.observe(viewLifecycleOwner, Observer {
+                val arrayList = it as ArrayList<String>
                 Toast.makeText(context, "스캔을 완료하였습니다.", Toast.LENGTH_SHORT).show()
+                val intent = Intent(activity, GetFileActivity::class.java)
+                intent.putExtra("fileUri", arrayList)
+                startActivity(intent)
             })
         }
     }
