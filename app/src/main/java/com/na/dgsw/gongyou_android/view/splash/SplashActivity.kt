@@ -19,11 +19,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     }
 
     override fun setUp() {
-        TODO("Not yet implemented")
+
     }
 
     override fun observerViewModel() {
-        TODO("Not yet implemented")
+
     }
 
 
