@@ -61,8 +61,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-//        super.onActivityResult(requestCode, resultCode, data)
-//        super.onActivityResult(requestCode, resultCode, data)
+
         EventBus.getInstance().post(ActivityResultEvent.create(requestCode, resultCode, data))
     }
 

@@ -57,6 +57,10 @@ class GetMainFragment : BaseFragment<FragmentGetMainBinding, GetMainViewModel>()
                 intentIntegrator()
             })
 
+            onDownloadEvent.observe(viewLifecycleOwner, Observer {
+                viewModel.getFiles(binding.keyEditText.text.toString().toInt())
+            })
+
             onSuccessEvent.observe(viewLifecycleOwner, Observer {
                 val arrayList = it as ArrayList<String>
                 Toast.makeText(context, "스캔을 완료하였습니다.", Toast.LENGTH_SHORT).show()

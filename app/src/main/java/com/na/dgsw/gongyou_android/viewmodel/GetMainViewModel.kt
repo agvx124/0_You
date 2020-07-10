@@ -18,9 +18,14 @@ class GetMainViewModel(application: Application): BaseViewModel<List<String>>(ap
     val onSuccessEvent = SingleLiveEvent<List<String>>()
 
     val onQrCodeScannerEvent = SingleLiveEvent<Unit>()
+    val onDownloadEvent = SingleLiveEvent<Unit>()
 
     fun qrCodeScannerBtnClick() {
         onQrCodeScannerEvent.call()
+    }
+
+    fun downloadBtnClick() {
+        onDownloadEvent.call()
     }
 
     fun getFiles(fileEigenValue: Int) {
