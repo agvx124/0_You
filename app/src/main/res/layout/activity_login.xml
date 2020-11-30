@@ -9,14 +9,14 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.na.dgsw.gongyou_android.viewmodel.LoginViewModel" />
+            type="com.na.dgsw.gongyou_android.presentation.ui.login.LoginViewModel" />
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.login.LoginActivity">
+        tools:context=".presentation.ui.login.LoginActivity">
 
         <TextView
             android:layout_width="wrap_content"

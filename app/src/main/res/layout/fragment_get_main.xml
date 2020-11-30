@@ -9,14 +9,14 @@
 
         <variable
             name="viewModel"
-            type="com.na.dgsw.gongyou_android.viewmodel.GetMainViewModel" />
+            type="com.na.dgsw.gongyou_android.presentation.ui.main.viewmodel.GetMainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fff"
-        tools:context=".view.main.GetMainFragment">
+        tools:context=".presentation.ui.main.fragment.GetMainFragment">
 
         <TextView
             android:id="@+id/sub_title_textView"

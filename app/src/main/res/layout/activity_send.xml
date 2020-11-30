@@ -8,13 +8,13 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.na.dgsw.gongyou_android.viewmodel.SendViewModel" />
+            type="com.na.dgsw.gongyou_android.presentation.ui.send.SendViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.send.SendActivity">
+        tools:context=".presentation.ui.send.SendActivity">
 
         <LinearLayout
             android:layout_width="wrap_content"

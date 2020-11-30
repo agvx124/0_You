@@ -1,7 +1,6 @@
 package com.na.dgsw.gongyou_android.data.network.client
 
-import com.na.dgsw.gongyou_android.Utils
-import com.na.dgsw.gongyou_android.base.BaseClient
+import com.na.dgsw.gongyou_android.presentation.ui.base.BaseClient
 import com.na.dgsw.gongyou_android.data.network.request.FileRequest
 import com.na.dgsw.gongyou_android.data.network.response.FileResponse
 import com.na.dgsw.gongyou_android.data.network.service.FileService

@@ -8,10 +8,10 @@ package com.na.dgsw.gongyou_android
 
 // 포트번호 고정
 // 무선랜
-// const hostname = "10.80.163.88";
+// const hostname = "10.80.163.40";
 // 유선랜
 // const hostname = "10.72.160.18";
 
 object Constants {
-    val DEFAULT_HOST = "http://10.80.163.88:3000/"
+    const val DEFAULT_HOST = "http://10.80.163.40:3000/"
 }

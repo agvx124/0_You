@@ -8,13 +8,13 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.na.dgsw.gongyou_android.viewmodel.WaitSendViewModel" />
+            type="com.na.dgsw.gongyou_android.presentation.ui.waitsend.WaitSendViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.waitsend.WaitSendActivity">
+        tools:context=".presentation.ui.waitsend.WaitSendActivity">
 
         <TextView
             android:id="@+id/eigen_value_textView"

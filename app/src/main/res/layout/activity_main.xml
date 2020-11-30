@@ -8,14 +8,14 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.na.dgsw.gongyou_android.viewmodel.MainViewModel" />
+            type="com.na.dgsw.gongyou_android.presentation.ui.main.viewmodel.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/main_background"
-        tools:context=".view.main.MainActivity">
+        tools:context=".presentation.ui.main.activity.MainActivity">
 
         <FrameLayout
             android:id="@+id/fragment_container"

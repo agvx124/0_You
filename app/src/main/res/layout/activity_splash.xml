@@ -9,14 +9,14 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.na.dgsw.gongyou_android.viewmodel.SplashViewModel" />
+            type="com.na.dgsw.gongyou_android.presentation.ui.splash.SplashViewModel" />
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.splash.SplashActivity">
+        tools:context=".presentation.ui.splash.SplashActivity">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animation_view"

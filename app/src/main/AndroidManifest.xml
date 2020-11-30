@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,10 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:networkSecurityConfig="@xml/network_security_config">
-        <activity android:name=".view.getfile.GetFileActivity"/>
-        <activity android:name=".view.waitsend.WaitSendActivity" />
-        <activity android:name=".view.send.SendActivity" />
-        <activity android:name=".view.splash.SplashActivity"
+        <activity android:name="com.na.dgsw.gongyou_android.presentation.ui.getfile.GetFileActivity"/>
+        <activity android:name="com.na.dgsw.gongyou_android.presentation.ui.waitsend.WaitSendActivity" />
+        <activity android:name="com.na.dgsw.gongyou_android.presentation.ui.send.SendActivity" />
+        <activity android:name="com.na.dgsw.gongyou_android.presentation.ui.splash.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,12 +29,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.login.LoginActivity" />
-        <activity android:name=".view.main.MainActivity">
+        <activity android:name="com.na.dgsw.gongyou_android.presentation.ui.login.LoginActivity" />
+        <activity android:name="com.na.dgsw.gongyou_android.presentation.ui.main.activity.MainActivity">
 
         </activity>
         <activity
-            android:name=".view.scan.ScanActivity"
+            android:name="com.na.dgsw.gongyou_android.presentation.ui.scan.ScanActivity"
             android:screenOrientation="portrait"
             tools:replace="android:screenOrientation"
             android:stateNotNeeded="true">
