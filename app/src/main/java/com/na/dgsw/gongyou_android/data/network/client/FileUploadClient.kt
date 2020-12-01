@@ -1,9 +1,9 @@
 package com.na.dgsw.gongyou_android.data.network.client
 
 import com.na.dgsw.gongyou_android.presentation.ui.base.BaseClient
-import com.na.dgsw.gongyou_android.data.network.request.FileRequest
-import com.na.dgsw.gongyou_android.data.network.response.FileResponse
-import com.na.dgsw.gongyou_android.data.network.service.FileService
+import com.na.dgsw.gongyou_android.domain.entity.file.request.FileRequest
+import com.na.dgsw.gongyou_android.domain.entity.file.response.FileResponse
+import com.na.dgsw.gongyou_android.data.datasource.remote.api.FileService
 import io.reactivex.Single
 
 

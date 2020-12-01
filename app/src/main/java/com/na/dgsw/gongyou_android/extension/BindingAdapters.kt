@@ -1,14 +1,10 @@
 package com.na.dgsw.gongyou_android.extension
 
-import android.widget.AdapterView
-import android.widget.ListView
 import androidx.databinding.BindingAdapter
-import androidx.databinding.ObservableArrayList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.na.dgsw.gongyou_android.data.dto.FileKind
-import com.na.dgsw.gongyou_android.widget.recycler.adapter.FileKindListAdapter
+import com.na.dgsw.gongyou_android.presentation.ui.main.recycler.adapter.FileKindListAdapter
 
 
 /**

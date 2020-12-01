@@ -1,9 +1,9 @@
-package com.na.dgsw.gongyou_android.data.network.service
+package com.na.dgsw.gongyou_android.data.datasource.remote.api
 
-import com.na.dgsw.gongyou_android.data.network.request.FileRequest
-import com.na.dgsw.gongyou_android.data.network.response.FileResponse
+import com.na.dgsw.gongyou_android.domain.entity.file.request.FileRequest
+import com.na.dgsw.gongyou_android.domain.entity.file.response.FileResponse
 import io.reactivex.Single
-import com.na.dgsw.gongyou_android.data.network.Response
+import com.na.dgsw.gongyou_android.domain.entity.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

@@ -1,4 +1,4 @@
-package com.na.dgsw.gongyou_android.data.network
+package com.na.dgsw.gongyou_android.domain.entity
 
 
 /**

@@ -1,4 +1,4 @@
-package com.na.dgsw.gongyou_android.widget.recycler
+package com.na.dgsw.gongyou_android.presentation.ui.main.recycler
 
 import android.view.View
 

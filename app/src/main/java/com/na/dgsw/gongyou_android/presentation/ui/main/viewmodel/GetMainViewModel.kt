@@ -3,7 +3,6 @@ package com.na.dgsw.gongyou_android.presentation.ui.main.viewmodel
 import android.app.Application
 import com.na.dgsw.gongyou_android.presentation.ui.base.BaseViewModel
 import com.na.dgsw.gongyou_android.data.network.client.FileUploadClient
-import com.na.dgsw.gongyou_android.data.network.response.FileResponse
 import com.na.dgsw.gongyou_android.utils.SingleLiveEvent
 
 

@@ -1,7 +1,7 @@
 package com.na.dgsw.gongyou_android.presentation.ui.base
 
 import com.na.dgsw.gongyou_android.utils.Utils
-import com.na.dgsw.gongyou_android.data.network.Response
+import com.na.dgsw.gongyou_android.domain.entity.Response
 import io.reactivex.functions.Function
 
 import org.json.JSONObject

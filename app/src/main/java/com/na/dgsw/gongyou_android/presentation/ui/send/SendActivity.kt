@@ -12,8 +12,8 @@ import com.google.firebase.storage.UploadTask
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.presentation.ui.base.BaseActivity
-import com.na.dgsw.gongyou_android.data.network.response.FileResponse
-import com.na.dgsw.gongyou_android.data.network.request.FileRequest
+import com.na.dgsw.gongyou_android.domain.entity.file.response.FileResponse
+import com.na.dgsw.gongyou_android.domain.entity.file.request.FileRequest
 import com.na.dgsw.gongyou_android.databinding.ActivitySendBinding
 import com.na.dgsw.gongyou_android.presentation.ui.main.activity.MainActivity
 import com.na.dgsw.gongyou_android.presentation.ui.waitsend.WaitSendActivity

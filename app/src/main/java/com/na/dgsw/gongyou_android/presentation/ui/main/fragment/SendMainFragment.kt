@@ -10,8 +10,8 @@ import com.na.dgsw.gongyou_android.data.dto.FileKind
 import com.na.dgsw.gongyou_android.databinding.FragmentFileBinding
 import com.na.dgsw.gongyou_android.presentation.ui.send.SendActivity
 import com.na.dgsw.gongyou_android.presentation.ui.main.viewmodel.SendMainViewModel
-import com.na.dgsw.gongyou_android.widget.recycler.OnItemClickListener
-import com.na.dgsw.gongyou_android.widget.recycler.adapter.FileKindListAdapter
+import com.na.dgsw.gongyou_android.presentation.ui.main.recycler.OnItemClickListener
+import com.na.dgsw.gongyou_android.presentation.ui.main.recycler.adapter.FileKindListAdapter
 import com.vincent.filepicker.Constant
 import com.vincent.filepicker.activity.AudioPickActivity
 import com.vincent.filepicker.activity.ImagePickActivity

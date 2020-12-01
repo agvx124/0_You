@@ -2,10 +2,9 @@ package com.na.dgsw.gongyou_android.presentation.ui.send
 
 import android.app.Application
 import com.na.dgsw.gongyou_android.presentation.ui.base.BaseViewModel
-import com.na.dgsw.gongyou_android.data.network.Response
 import com.na.dgsw.gongyou_android.data.network.client.FileUploadClient
-import com.na.dgsw.gongyou_android.data.network.request.FileRequest
-import com.na.dgsw.gongyou_android.data.network.response.FileResponse
+import com.na.dgsw.gongyou_android.domain.entity.file.request.FileRequest
+import com.na.dgsw.gongyou_android.domain.entity.file.response.FileResponse
 import com.na.dgsw.gongyou_android.utils.SingleLiveEvent
 
 

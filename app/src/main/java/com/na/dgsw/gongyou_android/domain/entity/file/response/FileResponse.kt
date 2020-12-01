@@ -1,4 +1,4 @@
-package com.na.dgsw.gongyou_android.data.network.response
+package com.na.dgsw.gongyou_android.domain.entity.file.response
 
 import java.io.Serializable
 

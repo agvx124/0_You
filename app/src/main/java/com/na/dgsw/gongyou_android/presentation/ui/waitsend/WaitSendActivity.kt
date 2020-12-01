@@ -8,7 +8,7 @@ import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.presentation.ui.base.BaseActivity
-import com.na.dgsw.gongyou_android.data.network.response.FileResponse
+import com.na.dgsw.gongyou_android.domain.entity.file.response.FileResponse
 import com.na.dgsw.gongyou_android.databinding.ActivityWaitSendBinding
 import java.lang.StringBuilder
 import kotlin.collections.ArrayList

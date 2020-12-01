@@ -1,4 +1,4 @@
-package com.na.dgsw.gongyou_android.widget.recycler.adapter
+package com.na.dgsw.gongyou_android.presentation.ui.main.recycler.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.na.dgsw.gongyou_android.data.dto.FileKind
 import com.na.dgsw.gongyou_android.databinding.FileKindListItemBinding
-import com.na.dgsw.gongyou_android.widget.recycler.OnItemClickListener
-import com.vincent.filepicker.activity.VideoPickActivity
-import kotlin.math.acos
+import com.na.dgsw.gongyou_android.presentation.ui.main.recycler.OnItemClickListener
 
 
 /**
