@@ -13,7 +13,7 @@ import com.na.dgsw.gongyou_android.databinding.ActivityWaitSendBinding
 import java.lang.StringBuilder
 import kotlin.collections.ArrayList
 
-class WaitSendActivity : BaseActivity<ActivityWaitSendBinding, WaitSendViewModel>() {
+class WaitSendActivity : BaseActivity<ActivityWaitSendBinding, WaitSendViewModel>(WaitSendViewModel::class) {
 
     private var dataList: ArrayList<FileResponse> = ArrayList()
 

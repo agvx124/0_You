@@ -5,7 +5,7 @@ import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.presentation.ui.base.BaseActivity
 import com.na.dgsw.gongyou_android.databinding.ActivityLoginBinding
 
-class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
+class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(LoginViewModel::class) {
 
     override fun getLayoutId(): Int {
         return R.layout.activity_login

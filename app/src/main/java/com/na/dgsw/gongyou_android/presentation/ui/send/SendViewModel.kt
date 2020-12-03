@@ -5,6 +5,7 @@ import com.na.dgsw.gongyou_android.presentation.ui.base.BaseViewModel
 import com.na.dgsw.gongyou_android.data.network.client.FileUploadClient
 import com.na.dgsw.gongyou_android.domain.entity.file.request.FileRequest
 import com.na.dgsw.gongyou_android.domain.entity.file.response.FileResponse
+import com.na.dgsw.gongyou_android.domain.usecase.FileUseCase
 import com.na.dgsw.gongyou_android.utils.SingleLiveEvent
 
 
@@ -13,7 +14,7 @@ import com.na.dgsw.gongyou_android.utils.SingleLiveEvent
  * skehdgur8591@naver.com
  */
 
-class SendViewModel(application: Application): BaseViewModel<FileResponse>(application) {
+class SendViewModel(application: Application, private val fileUseCase: FileUseCase): BaseViewModel<FileResponse>(application) {
     private val fileUploadClient: FileUploadClient = FileUploadClient()
 
     val onSuccessEvent = SingleLiveEvent<FileResponse>()
@@ -21,7 +22,8 @@ class SendViewModel(application: Application): BaseViewModel<FileResponse>(appli
     val sendBtnClickEvent = SingleLiveEvent<Unit>()
 
     fun postUrlUpload(request: FileRequest) {
-        addDisposable(fileUploadClient.postUrlUpload(request), dataObserver)
+//        addDisposable(fileUploadClient.postUrlUpload(request), dataObserver)
+        fileUseCase.postUrlUpload(request)
     }
 
     fun onCancelBtnClick() {

@@ -9,7 +9,7 @@ import com.na.dgsw.gongyou_android.presentation.ui.base.BaseActivity
 import com.na.dgsw.gongyou_android.databinding.ActivitySplashBinding
 import com.na.dgsw.gongyou_android.presentation.ui.main.activity.MainActivity
 
-class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
+class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(SplashViewModel::class) {
     override fun getLayoutId(): Int {
         return R.layout.activity_splash
     }

@@ -17,7 +17,7 @@ import java.io.File
  * Created by NA on 2020-07-07
  * skehdgur8591@naver.com
  */
-class GetFileActivity: BaseActivity<ActivityGetFileBinding, GetFileViewModel>() {
+class GetFileActivity: BaseActivity<ActivityGetFileBinding, GetFileViewModel>(GetFileViewModel::class) {
 
     var getFileList = arrayListOf<String>()
 

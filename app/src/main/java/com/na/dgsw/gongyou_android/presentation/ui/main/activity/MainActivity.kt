@@ -9,8 +9,8 @@ import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.databinding.ActivityMainBinding
 import com.na.dgsw.gongyou_android.presentation.ui.base.BaseActivity
-import com.na.dgsw.gongyou_android.data.dto.ActivityResultEvent
-import com.na.dgsw.gongyou_android.data.dto.EventBus
+import com.na.dgsw.gongyou_android.utils.ActivityResultEvent
+import com.na.dgsw.gongyou_android.utils.EventBus
 import com.na.dgsw.gongyou_android.presentation.ui.main.fragment.GetMainFragment
 import com.na.dgsw.gongyou_android.presentation.ui.main.fragment.SendMainFragment
 import com.na.dgsw.gongyou_android.presentation.ui.main.fragment.StorageMainFragment
@@ -21,7 +21,7 @@ import com.na.dgsw.gongyou_android.presentation.ui.main.viewmodel.MainViewModel
  * skehdgur8591@naver.com
  */
 
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(MainViewModel::class) {
 
     private val permissionList = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
 
@@ -65,7 +65,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        EventBus.getInstance().post(ActivityResultEvent.create(requestCode, resultCode, data))
+        EventBus.getInstance().post(
+            ActivityResultEvent.create(requestCode, resultCode, data))
     }
 
     private fun checkPermission() {

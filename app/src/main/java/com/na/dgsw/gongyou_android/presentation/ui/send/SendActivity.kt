@@ -18,7 +18,7 @@ import com.na.dgsw.gongyou_android.databinding.ActivitySendBinding
 import com.na.dgsw.gongyou_android.presentation.ui.main.activity.MainActivity
 import com.na.dgsw.gongyou_android.presentation.ui.waitsend.WaitSendActivity
 
-class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>() {
+class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>(SendViewModel::class) {
 
     private val fileEigenNum = (100000 .. 999999).random()
     private val arrayUri: ArrayList<Uri> = ArrayList()

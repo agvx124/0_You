@@ -7,22 +7,24 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.na.dgsw.gongyou_android.utils.SingleLiveEvent
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.reflect.KClass
 
 /**
  * Created by NA on 2020-04-16
  * skehdgur8591@naver.com
  */
 
-abstract class BaseActivity<T: ViewDataBinding, V: BaseViewModel<*>> : AppCompatActivity(),
+abstract class BaseActivity<T: ViewDataBinding, VM: BaseViewModel<*>>(clazz: KClass<VM>) : AppCompatActivity(),
     BaseFragment.CallBack {
 
     protected lateinit var binding: T
-    protected lateinit var viewModel : V
+    protected val viewModel : VM by viewModel(clazz)
 
     @LayoutRes
     abstract fun getLayoutId(): Int
 
-    abstract val viewModelClass: Class<V>
+    abstract val viewModelClass: Class<VM>
 
     val onErrorEvent = SingleLiveEvent<Throwable>()
 
@@ -44,7 +46,7 @@ abstract class BaseActivity<T: ViewDataBinding, V: BaseViewModel<*>> : AppCompat
 
     private fun performDataBinding() {
         binding = DataBindingUtil.setContentView(this, getLayoutId())
-        this.viewModel = if (::viewModel.isInitialized) viewModel else ViewModelProvider(this).get(viewModelClass)
+//        this.viewModel = if (::viewModel.isInitialized) viewModel else ViewModelProvider(this).get(viewModelClass)
         binding.lifecycleOwner = this
         binding.setVariable(getBindingVariable(), viewModel)
         binding.executePendingBindings()
