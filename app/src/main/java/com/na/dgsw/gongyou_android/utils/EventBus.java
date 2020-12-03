@@ -1,4 +1,4 @@
-package com.na.dgsw.gongyou_android.data.dto;
+package com.na.dgsw.gongyou_android.utils;
 
 import android.os.Handler;
 import android.os.Looper;
