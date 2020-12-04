@@ -1,5 +1,12 @@
 package com.na.dgsw.gongyou_android.presentation.di
 
+import com.na.dgsw.gongyou_android.data.datasource.remote.RemoteClient
+import com.na.dgsw.gongyou_android.data.datasource.remote.api.FileService
+import com.na.dgsw.gongyou_android.data.datasource.remote.file.FileDataSource
+import com.na.dgsw.gongyou_android.data.datasource.remote.file.FileSourceImpl
+import com.na.dgsw.gongyou_android.data.repository.FileRepository
+import com.na.dgsw.gongyou_android.data.repository.FileRepositoryImpl
+import com.na.dgsw.gongyou_android.domain.usecase.FileUseCase
 import com.na.dgsw.gongyou_android.presentation.ui.getfile.GetFileViewModel
 import com.na.dgsw.gongyou_android.presentation.ui.login.LoginViewModel
 import com.na.dgsw.gongyou_android.presentation.ui.main.viewmodel.GetMainViewModel
@@ -20,36 +27,41 @@ val viewModelModule = module {
     viewModel { MainViewModel(get()) }
     viewModel { GetFileViewModel(get()) }
     viewModel { LoginViewModel(get()) }
-    viewModel { GetMainViewModel(get()) }
+    viewModel { GetMainViewModel(get(), get()) }
     viewModel { SendMainViewModel(get()) }
-    viewModel { SendViewModel(get()) }
+    viewModel { SendViewModel(get(), get()) }
     viewModel { SplashViewModel(get()) }
     viewModel { WaitSendViewModel(get()) }
 }
 
-//val remoteModule = module {
-//    single { RemoteClient }
-//}
-//
-//val dataSourceModule = module {
-//    single { NiceOpenSourceImpl(get()) as NiceOpenDataSource }
-//}
-//
-//val apiModule = module {
-//    single { mealAPI }
-//}
-//
-//val repositoryModule = module {
-//    single { MealRepositoryImpl(get()) as MealRepository }
-//}
-//
-//val useCaseModule = module {
-//    single { MealUseCase(get()) }
-//}
-//
-//val retrofit = RemoteClient.createRetrofit(true)
-//private val mealAPI = retrofit.create(NiceOpenAPI::class.java)
+val remoteModule = module {
+    single { RemoteClient }
+}
+
+val dataSourceModule = module {
+    single { FileSourceImpl(get()) as FileDataSource }
+}
+
+val apiModule = module {
+    single { fileAPI }
+}
+
+val repositoryModule = module {
+    single { FileRepositoryImpl(get()) as FileRepository }
+}
+
+val useCaseModule = module {
+    single { FileUseCase(get()) }
+}
+
+val retrofit = RemoteClient.createRetrofit(true)
+private val fileAPI = retrofit.create(FileService::class.java)
 
 val appModules = listOf(
-    viewModelModule
+    viewModelModule,
+    remoteModule,
+    dataSourceModule,
+    apiModule,
+    repositoryModule,
+    useCaseModule
 )

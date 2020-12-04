@@ -2,15 +2,8 @@ package com.na.dgsw.gongyou_android.presentation.ui.waitsend
 
 import android.app.Application
 import android.os.CountDownTimer
-import android.view.View
-import android.widget.AdapterView
-import androidx.databinding.ObservableArrayList
-import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.na.dgsw.gongyou_android.presentation.ui.base.BaseViewModel
-import com.na.dgsw.gongyou_android.data.dto.FileKind
-import com.na.dgsw.gongyou_android.utils.SingleLiveEvent
-import kotlin.concurrent.timer
 
 
 /**

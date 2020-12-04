@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.presentation.ui.base.BaseFragment
-import com.na.dgsw.gongyou_android.data.dto.FileKind
+import com.na.dgsw.gongyou_android.domain.entity.file.FileKind
 import com.na.dgsw.gongyou_android.databinding.FragmentFileBinding
 import com.na.dgsw.gongyou_android.presentation.ui.send.SendActivity
 import com.na.dgsw.gongyou_android.presentation.ui.main.viewmodel.SendMainViewModel

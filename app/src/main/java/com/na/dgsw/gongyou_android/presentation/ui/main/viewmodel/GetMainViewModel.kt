@@ -1,8 +1,9 @@
 package com.na.dgsw.gongyou_android.presentation.ui.main.viewmodel
 
+import android.annotation.SuppressLint
 import android.app.Application
 import com.na.dgsw.gongyou_android.presentation.ui.base.BaseViewModel
-import com.na.dgsw.gongyou_android.data.network.client.FileUploadClient
+import com.na.dgsw.gongyou_android.domain.usecase.FileUseCase
 import com.na.dgsw.gongyou_android.utils.SingleLiveEvent
 
 
@@ -10,9 +11,7 @@ import com.na.dgsw.gongyou_android.utils.SingleLiveEvent
  * Created by NA on 2020-06-25
  * skehdgur8591@naver.com
  */
-class GetMainViewModel(application: Application): BaseViewModel<List<String>>(application) {
-
-    private val fileUploadClient: FileUploadClient = FileUploadClient()
+class GetMainViewModel(application: Application, private val fileUseCase: FileUseCase): BaseViewModel<List<String>>(application) {
 
     val onSuccessEvent = SingleLiveEvent<List<String>>()
 
@@ -27,8 +26,13 @@ class GetMainViewModel(application: Application): BaseViewModel<List<String>>(ap
         onDownloadEvent.call()
     }
 
+    @SuppressLint("CheckResult")
     fun getFiles(fileEigenValue: Int) {
-        addDisposable(fileUploadClient.getFiles(fileEigenValue), dataObserver)
+        fileUseCase.getFiles(fileEigenValue).subscribe { response ->
+            if (response.isSuccessful) {
+                onSuccessEvent.value = response.body()!!.data
+            }
+        }
     }
 
     override fun onRetrieveDataSuccess(data: List<String>) {

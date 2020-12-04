@@ -10,8 +10,8 @@ import com.google.zxing.integration.android.IntentIntegrator
 import com.na.dgsw.gongyou_android.BR
 import com.na.dgsw.gongyou_android.R
 import com.na.dgsw.gongyou_android.presentation.ui.base.BaseFragment
-import com.na.dgsw.gongyou_android.data.dto.ActivityResultEvent
-import com.na.dgsw.gongyou_android.data.dto.EventBus
+import com.na.dgsw.gongyou_android.utils.ActivityResultEvent
+import com.na.dgsw.gongyou_android.utils.EventBus
 import com.na.dgsw.gongyou_android.databinding.FragmentGetMainBinding
 import com.na.dgsw.gongyou_android.presentation.ui.getfile.GetFileActivity
 import com.na.dgsw.gongyou_android.presentation.ui.scan.ScanActivity
