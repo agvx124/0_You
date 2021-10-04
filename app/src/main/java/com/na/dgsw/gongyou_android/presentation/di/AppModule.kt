@@ -12,6 +12,7 @@ import com.na.dgsw.gongyou_android.presentation.ui.login.LoginViewModel
 import com.na.dgsw.gongyou_android.presentation.ui.main.viewmodel.GetMainViewModel
 import com.na.dgsw.gongyou_android.presentation.ui.main.viewmodel.MainViewModel
 import com.na.dgsw.gongyou_android.presentation.ui.main.viewmodel.SendMainViewModel
+import com.na.dgsw.gongyou_android.presentation.ui.main.viewmodel.StorageMainViewModel
 import com.na.dgsw.gongyou_android.presentation.ui.send.SendViewModel
 import com.na.dgsw.gongyou_android.presentation.ui.splash.SplashViewModel
 import com.na.dgsw.gongyou_android.presentation.ui.waitsend.WaitSendViewModel
@@ -29,6 +30,7 @@ val viewModelModule = module {
     viewModel { LoginViewModel(get()) }
     viewModel { GetMainViewModel(get(), get()) }
     viewModel { SendMainViewModel(get()) }
+    viewModel { StorageMainViewModel(get()) }
     viewModel { SendViewModel(get(), get()) }
     viewModel { SplashViewModel(get()) }
     viewModel { WaitSendViewModel(get()) }
