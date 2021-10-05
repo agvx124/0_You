@@ -42,7 +42,7 @@ class GetMainFragment : BaseFragment<FragmentGetMainBinding, GetMainViewModel>()
     }
 
     override fun setUp() {
-        EventBus.getInstance().register(this)
+        EventBus.instance?.register(this)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

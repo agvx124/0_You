@@ -65,8 +65,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(MainViewMo
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        EventBus.getInstance().post(
-            ActivityResultEvent.create(requestCode, resultCode, data))
+        EventBus.instance?.post(
+            ActivityResultEvent.create(requestCode, resultCode, data!!))
     }
 
     private fun checkPermission() {
