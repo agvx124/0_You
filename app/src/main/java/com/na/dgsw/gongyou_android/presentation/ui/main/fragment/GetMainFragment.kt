@@ -61,6 +61,7 @@ class GetMainFragment : BaseFragment<FragmentGetMainBinding, GetMainViewModel>()
             onSuccessEvent.observe(viewLifecycleOwner, Observer {
                 val arrayList = it as ArrayList<String>
                 Toast.makeText(context, "스캔을 완료하였습니다.", Toast.LENGTH_SHORT).show()
+
                 val intent = Intent(activity, GetFileActivity::class.java)
                 intent.putExtra("fileUri", arrayList)
                 startActivity(intent)
@@ -81,23 +82,21 @@ class GetMainFragment : BaseFragment<FragmentGetMainBinding, GetMainViewModel>()
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
 
-        if (result != null) {
-            if (result.contents == null) {
+        result?.let {
+            result.contents?.let {
+                viewModel.getFiles(it.toInt())
+            } ?: kotlin.run {
                 Toast.makeText(context, "취소하셨습니다.", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                viewModel.getFiles(result.contents.toInt())
             }
         }
 
-        Toast.makeText(context, "Scanned: " + data!!.getStringExtra(Intents.Scan.RESULT), Toast.LENGTH_LONG).show()
+        Toast.makeText(context, "Scanned: " + data?.getStringExtra(Intents.Scan.RESULT), Toast.LENGTH_LONG).show()
     }
 
-    private fun intentIntegrator() {
-        val intentIntegrator = IntentIntegrator(requireActivity())
-        intentIntegrator.captureActivity = ScanActivity::class.java
-        intentIntegrator.setPrompt("QR 코드를 사각형 안에 비춰주세요.")
-        intentIntegrator.setBeepEnabled(false) // 인식 소리 - F
-        intentIntegrator.initiateScan()
+    private fun intentIntegrator() = IntentIntegrator(requireActivity()).apply {
+        captureActivity = ScanActivity::class.java
+        setPrompt("QR 코드를 사각형 안에 비춰주세요.")
+        setBeepEnabled(false) // 인식 소리 - F
+        initiateScan()
     }
 }

@@ -35,17 +35,15 @@ class SendMainFragment : BaseFragment<FragmentFileBinding, SendMainViewModel>() 
     override val viewModelClass: Class<SendMainViewModel>
         get() = SendMainViewModel::class.java
 
-
     private val fileKindList = arrayListOf<FileKind>()
 
-    private fun setFileKindListData(): List<FileKind> {
-        fileKindList.add(FileKind(getImageId("ic_image"), "이미지"))
-        fileKindList.add(FileKind(getImageId("ic_video"), "비디오"))
-        fileKindList.add(FileKind(getImageId("ic_audio"), "오디오"))
-        fileKindList.add(FileKind(getImageId("ic_document"), "문서"))
-
-        return fileKindList
-    }
+    private fun setFileKindListData(): ArrayList<FileKind> =
+        fileKindList.apply {
+            add(FileKind(getImageId("ic_image"), "이미지"))
+            add(FileKind(getImageId("ic_video"), "비디오"))
+            add(FileKind(getImageId("ic_audio"), "오디오"))
+            add(FileKind(getImageId("ic_document"), "문서"))
+        }
 
     private fun getImageId(imageName: String): Int {
         return requireContext().resources.getIdentifier("drawable/" + imageName, null, requireContext().packageName)
@@ -69,13 +67,14 @@ class SendMainFragment : BaseFragment<FragmentFileBinding, SendMainViewModel>() 
                 if (resultCode == ImagePickActivity.RESULT_OK) {
                     val list = (data!!.getParcelableArrayListExtra<ImageFile>(Constant.RESULT_PICK_IMAGE))
                     val builder = StringBuilder()
-                    for (file in list!!) {
-                        val path = file.path
-                        builder.append(path + "\n")
+                    list?.let {
+                        for (file in it) {
+                            val path = file.path
+                            builder.append(path + "\n")
+                        }
                     }
 
-                    val intent = Intent(activity!!.application, SendActivity::class.java)
-                    intent.putExtra("dataUrl", builder.toString())
+                    val intent = setIntentWithDataUrl(builder.toString())
                     intent.putExtra("extension", list)
                     startActivity(intent)
                 }
@@ -84,27 +83,29 @@ class SendMainFragment : BaseFragment<FragmentFileBinding, SendMainViewModel>() 
                 if (resultCode == VideoPickActivity.RESULT_OK) {
                     val list = (data!!.getParcelableArrayListExtra<VideoFile>(Constant.RESULT_PICK_IMAGE))
                     val builder = StringBuilder()
-                    for (file in list!!) {
-                        val path = file.path
-                        builder.append(path + "\n")
+                    list?.let {
+                        for (file in it) {
+                            val path = file.path
+                            builder.append(path + "\n")
+                        }
                     }
 
-                    val intent = Intent(activity!!.application, SendActivity::class.java)
-                    intent.putExtra("dataUrl", builder.toString())
+                    val intent = setIntentWithDataUrl(builder.toString())
                     startActivity(intent)
                 }
             }
             Constant.REQUEST_CODE_PICK_AUDIO -> {
                 if (resultCode == AudioPickActivity.RESULT_OK) {
-                    val list = (data!!.getParcelableArrayListExtra<AudioFile>(Constant.RESULT_PICK_IMAGE))
+                    val list = (data?.getParcelableArrayListExtra<AudioFile>(Constant.RESULT_PICK_IMAGE))
                     val builder = StringBuilder()
-                    for (file in list!!) {
-                        val path = file.path
-                        builder.append(path + "\n")
+                    list?.let {
+                        for (file in it) {
+                            val path = file.path
+                            builder.append(path + "\n")
+                        }
                     }
 
-                    val intent = Intent(activity!!.application, SendActivity::class.java)
-                    intent.putExtra("dataUrl", builder.toString())
+                    val intent = setIntentWithDataUrl(builder.toString())
                     startActivity(intent)
                 }
             }
@@ -112,13 +113,14 @@ class SendMainFragment : BaseFragment<FragmentFileBinding, SendMainViewModel>() 
                 if (resultCode == NormalFilePickActivity.RESULT_OK) {
                     val list = (data!!.getParcelableArrayListExtra<NormalFile>(Constant.RESULT_PICK_IMAGE))
                     val builder = StringBuilder()
-                    for (file in list!!) {
-                        val path = file.path
-                        builder.append(path + "\n")
+                    list?.let {
+                        for (file in it) {
+                            val path = file.path
+                            builder.append(path + "\n")
+                        }
                     }
 
-                    val intent = Intent(activity!!.application, SendActivity::class.java)
-                    intent.putExtra("dataUrl", builder.toString())
+                    val intent = setIntentWithDataUrl(builder.toString())
                     startActivity(intent)
                 }
             }
@@ -132,12 +134,10 @@ class SendMainFragment : BaseFragment<FragmentFileBinding, SendMainViewModel>() 
     }
 
     private fun setRecyclerView() {
-        val fileKindListAdapter = FileKindListAdapter(requireContext())
+        val fileKindListAdapter = FileKindListAdapter(setFileKindListData())
         recyclerViewSetClickListener(fileKindListAdapter)
-        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
+
         binding.recyclerview.adapter = fileKindListAdapter
-        fileKindListAdapter.fileKindList = setFileKindListData()
-        fileKindListAdapter.notifyDataSetChanged()
     }
 
     private fun recyclerViewSetClickListener(fileKindListAdapter: FileKindListAdapter) {
@@ -174,4 +174,10 @@ class SendMainFragment : BaseFragment<FragmentFileBinding, SendMainViewModel>() 
 
         fileKindListAdapter.setOnItemClickListener(onItemClickListener)
     }
+
+    private fun setIntentWithDataUrl(dataUrl: String): Intent =
+        Intent(activity, SendActivity::class.java).apply {
+            putExtra("dataUrl", dataUrl)
+        }
+
 }

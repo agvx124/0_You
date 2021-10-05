@@ -13,9 +13,7 @@ import com.na.dgsw.gongyou_android.presentation.ui.main.recycler.OnItemClickList
  * Created by NA on 2020-05-21
  * skehdgur8591@naver.com
  */
-class FileKindListAdapter(private val context: Context): RecyclerView.Adapter<FileKindListAdapter.FileKindListViewHolder>() {
-
-    var fileKindList = listOf<FileKind>()
+class FileKindListAdapter(var fileKindList: List<FileKind>): RecyclerView.Adapter<FileKindListAdapter.FileKindListViewHolder>() {
 
     lateinit var mListener: OnItemClickListener
 

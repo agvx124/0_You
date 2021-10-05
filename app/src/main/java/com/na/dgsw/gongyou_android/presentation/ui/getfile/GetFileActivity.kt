@@ -51,9 +51,9 @@ class GetFileActivity: BaseActivity<ActivityGetFileBinding, GetFileViewModel>(Ge
     }
 
     private fun getFiles() {
-        for (i in 0..getFileList.size - 1) {
-            val pos = getFileList.get(i).lastIndexOf("/")
-            val fileName = getFileList.get(i).substring(pos + 1)
+        for (i in 0 until getFileList.size) {
+            val pos = getFileList[i].lastIndexOf("/")
+            val fileName = getFileList[i].substring(pos + 1)
 
 
             val progressDialog = ProgressDialog(this)
@@ -62,7 +62,7 @@ class GetFileActivity: BaseActivity<ActivityGetFileBinding, GetFileViewModel>(Ge
 
             val storage = FirebaseStorage.getInstance()
             val storageRef = storage.getReferenceFromUrl("gs://gongyou-c6aa9.appspot.com")
-            val fileRef = storageRef.child(getFileList.get(i))
+            val fileRef = storageRef.child(getFileList[i])
 
             val path = File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS).toString())
 
