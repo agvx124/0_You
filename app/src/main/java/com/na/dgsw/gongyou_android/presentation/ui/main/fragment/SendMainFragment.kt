@@ -29,12 +29,12 @@ import java.lang.StringBuilder
  * skehdgur8591@naver.com
  */
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class SendMainFragment : BaseFragment<FragmentFileBinding, SendMainViewModel>() {
 
     override val viewModelClass: Class<SendMainViewModel>
         get() = SendMainViewModel::class.java
 
+    // 더미 데이터를 뷰모델에서 처리하려 했으나 'context'를 가져와야 하여 프래그먼트에서 처리
     private val fileKindList = arrayListOf<FileKind>()
 
     private fun setFileKindListData(): ArrayList<FileKind> =
@@ -65,7 +65,7 @@ class SendMainFragment : BaseFragment<FragmentFileBinding, SendMainViewModel>() 
         when (requestCode) {
             Constant.REQUEST_CODE_PICK_IMAGE -> {
                 if (resultCode == ImagePickActivity.RESULT_OK) {
-                    val list = (data!!.getParcelableArrayListExtra<ImageFile>(Constant.RESULT_PICK_IMAGE))
+                    val list = (data?.getParcelableArrayListExtra<ImageFile>(Constant.RESULT_PICK_IMAGE))
                     val builder = StringBuilder()
                     list?.let {
                         for (file in it) {
@@ -81,7 +81,7 @@ class SendMainFragment : BaseFragment<FragmentFileBinding, SendMainViewModel>() 
             }
             Constant.REQUEST_CODE_PICK_VIDEO -> {
                 if (resultCode == VideoPickActivity.RESULT_OK) {
-                    val list = (data!!.getParcelableArrayListExtra<VideoFile>(Constant.RESULT_PICK_IMAGE))
+                    val list = (data?.getParcelableArrayListExtra<VideoFile>(Constant.RESULT_PICK_IMAGE))
                     val builder = StringBuilder()
                     list?.let {
                         for (file in it) {
@@ -111,7 +111,7 @@ class SendMainFragment : BaseFragment<FragmentFileBinding, SendMainViewModel>() 
             }
             Constant.REQUEST_CODE_PICK_FILE -> {
                 if (resultCode == NormalFilePickActivity.RESULT_OK) {
-                    val list = (data!!.getParcelableArrayListExtra<NormalFile>(Constant.RESULT_PICK_IMAGE))
+                    val list = (data?.getParcelableArrayListExtra<NormalFile>(Constant.RESULT_PICK_IMAGE))
                     val builder = StringBuilder()
                     list?.let {
                         for (file in it) {
@@ -145,25 +145,25 @@ class SendMainFragment : BaseFragment<FragmentFileBinding, SendMainViewModel>() 
             override fun onItemClick(v: View, position: Int) {
                 when (position) {
                     0 -> {
-                        val intent = Intent(activity!!.application, ImagePickActivity::class.java)
+                        val intent = Intent(requireActivity().application, ImagePickActivity::class.java)
                         intent.putExtra(ImagePickActivity.IS_NEED_CAMERA, true)
                         intent.putExtra(Constant.MAX_NUMBER, 9)
                         startActivityForResult(intent, Constant.REQUEST_CODE_PICK_IMAGE)
                     }
                     1 -> {
-                        val intent = Intent(activity!!.application, VideoPickActivity::class.java)
+                        val intent = Intent(requireActivity().application, VideoPickActivity::class.java)
                         intent.putExtra(VideoPickActivity.IS_NEED_CAMERA, true)
                         intent.putExtra(Constant.MAX_NUMBER, 9)
                         startActivityForResult(intent, Constant.REQUEST_CODE_PICK_VIDEO)
                     }
                     2 -> {
-                        val intent = Intent(activity!!.application, AudioPickActivity::class.java)
+                        val intent = Intent(requireActivity().application, AudioPickActivity::class.java)
                         intent.putExtra(AudioPickActivity.IS_NEED_RECORDER, true)
                         intent.putExtra(Constant.MAX_NUMBER, 9)
                         startActivityForResult(intent, Constant.REQUEST_CODE_PICK_AUDIO)
                     }
                     3 -> {
-                        val intent = Intent(activity!!.application, NormalFilePickActivity::class.java)
+                        val intent = Intent(requireActivity().application, NormalFilePickActivity::class.java)
                         intent.putExtra(NormalFilePickActivity.SUFFIX, arrayOf("xlsx", "xls", "doc", "docx", "ppt", "pptx", "pdf"))
                         intent.putExtra(Constant.MAX_NUMBER, 9)
                         startActivityForResult(intent, Constant.REQUEST_CODE_PICK_FILE)

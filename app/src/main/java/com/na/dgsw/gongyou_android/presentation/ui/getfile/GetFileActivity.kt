@@ -33,7 +33,7 @@ class GetFileActivity: BaseActivity<ActivityGetFileBinding, GetFileViewModel>(Ge
     }
 
     override fun setUp() {
-        getFileList = intent.extras!!.getStringArrayList("fileUri") as ArrayList<String>
+        getFileList = intent.extras?.getStringArrayList("fileUri") as ArrayList<String>
 
         binding.fileSizeTextView.text = "선택한 파일 " + getFileList.size + "개를 받으시겠습니까?"
     }

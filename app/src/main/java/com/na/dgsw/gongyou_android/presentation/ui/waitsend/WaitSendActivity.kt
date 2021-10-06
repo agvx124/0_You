@@ -31,10 +31,10 @@ class WaitSendActivity : BaseActivity<ActivityWaitSendBinding, WaitSendViewModel
     override fun setUp() {
         dataList = intent.getSerializableExtra("dataList") as ArrayList<FileResponse>
 
-        binding.eigenValueTextView.text = setTwoCharSpacing(dataList.get(0).fileEigenValue.toString())
+        binding.eigenValueTextView.text = setTwoCharSpacing(dataList[0].fileEigenValue.toString())
 
         val multiFormatWriter = MultiFormatWriter()
-        val bitMatrix = multiFormatWriter.encode(dataList.get(0).fileEigenValue.toString(), BarcodeFormat.QR_CODE, 200, 200)
+        val bitMatrix = multiFormatWriter.encode(dataList[0].fileEigenValue.toString(), BarcodeFormat.QR_CODE, 200, 200)
         val barcodeEncode = BarcodeEncoder()
         val bitmap = barcodeEncode.createBitmap(bitMatrix)
         binding.qrCreateImageView.setImageBitmap(bitmap)
@@ -49,15 +49,15 @@ class WaitSendActivity : BaseActivity<ActivityWaitSendBinding, WaitSendViewModel
     }
 
     private fun setTwoCharSpacing(str: String): String {
-        var result = StringBuilder()
+        val result = StringBuilder()
 
         for (i in 0.. str.length) {
             if ((i + 1) % 2 == 0) {
-                result.append(str.get(i) + " ")
+                result.append(str[i] + " ")
                 if (i + 1 == str.length) break
             }
             else {
-                result.append(str.get(i))
+                result.append(str[i])
             }
         }
 

@@ -24,7 +24,7 @@ class SendViewModel(application: Application, private val fileUseCase: FileUseCa
     fun postUrlUpload(request: FileRequest) {
         fileUseCase.postUrlUpload(request).subscribe { response ->
             if (response.isSuccessful) {
-                onSuccessEvent.value = response.body()!!.data
+                onSuccessEvent.value = response.body()?.data
             }
         }
     }

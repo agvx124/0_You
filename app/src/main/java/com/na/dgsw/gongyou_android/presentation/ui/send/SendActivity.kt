@@ -38,7 +38,7 @@ class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>(SendViewMo
     override fun setUp() {
         val intent = intent
         val dataUrls = intent.getStringExtra("dataUrl")
-        arrayUriIndex = dataUrls!!.split("\n") as ArrayList<String>
+        arrayUriIndex = dataUrls?.split("\n") as ArrayList<String>
 
         // "" null Check
         for (fileUrl in arrayUriIndex) {
@@ -100,9 +100,13 @@ class SendActivity : BaseActivity<ActivitySendBinding, SendViewModel>(SendViewMo
 
             val storage: FirebaseStorage = FirebaseStorage.getInstance()
 
+            lateinit var ext: String
             // 파일 확장자 구하기
-            val pos = filePath.path!!.lastIndexOf(".")
-            val ext = filePath.path!!.substring(pos + 1)
+            filePath.path?.let {
+                val pos = it.lastIndexOf(".")
+                ext = it.substring(pos + 1)
+            }
+
 
             val randomNum = (0 .. 9999999).random()
             val fileName = "$randomNum.$ext"

@@ -32,12 +32,7 @@ class StorageMainFragment : BaseFragment<FragmentStorageBinding, StorageMainView
     }
 
     override fun setUp() {
-//        viewModel.remainStorageLiveData = viewModel.
-//        binding.remainStorageTextView.text = checkExternalAvailableMemory(true)
-//        binding.totalStorageTextView.text = checkExternalStorageAllMemory(true)
 
-//        val value: Int = (checkExternalAvailableMemory(false).toDouble() / checkExternalStorageAllMemory(false).toDouble() * 100.0).toInt()
-//        binding.remainStorageProgressBar.progress = value
     }
 
     override fun getLayoutId(): Int {

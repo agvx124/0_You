@@ -3,6 +3,7 @@ package com.na.dgsw.gongyou_android.presentation.ui.main.viewmodel
 import android.app.Application
 import android.os.Environment
 import android.os.StatFs
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.na.dgsw.gongyou_android.presentation.ui.base.BaseViewModel
 import java.io.File
@@ -17,9 +18,11 @@ import kotlin.math.pow
  */
 class StorageMainViewModel(application: Application): BaseViewModel<Any>(application) {
 
-    val remainProgressValue = MutableLiveData<Double>()
+//    private val _remainProgressValue = MutableLiveData<Int>()
+//    val remainProgressValue : LiveData<Int>
+//        get() =  _remainProgressValue
 
-    fun checkExternalStorageAllMemory(checkVal: Boolean): String {
+    fun getExternalStorageAllMemory(checkVal: Boolean): String {
 
         return if (isExternalMemoryAvailable()) {
             val statFs = StatFs(Environment.getExternalStorageDirectory().path)
@@ -38,7 +41,7 @@ class StorageMainViewModel(application: Application): BaseViewModel<Any>(applica
         }
     }
 
-    fun checkExternalAvailableMemory(checkVal: Boolean): String {
+    fun getExternalAvailableMemory(checkVal: Boolean): String {
         return if (isExternalMemoryAvailable()) {
             val file: File = Environment.getExternalStorageDirectory()
             val statFs = StatFs(file.path)
@@ -74,5 +77,9 @@ class StorageMainViewModel(application: Application): BaseViewModel<Any>(applica
 
     private fun isExternalMemoryAvailable(): Boolean {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)
+    }
+
+    fun getPercentageOfAvailableMemory(): Int {
+        return (getExternalAvailableMemory(false).toDouble() / getExternalStorageAllMemory(false).toDouble() * 100.0).toInt()
     }
 }
